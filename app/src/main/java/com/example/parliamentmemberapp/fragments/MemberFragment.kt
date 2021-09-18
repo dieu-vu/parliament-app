@@ -32,6 +32,8 @@ class MemberFragment : Fragment() {
         false, "attachment/member/pictures/Huru-Petri-web-v0003-1467.jpg","https://twitter.com/HuruPetri",
         1966, "Satakunta")
         binding.member = person1
+
+    //TODO: Add function to display data
         return binding.root
     }
 

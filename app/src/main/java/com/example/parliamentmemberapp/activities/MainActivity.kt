@@ -17,7 +17,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    private fun displayInfo(view: View){
-//
-//    }
 }

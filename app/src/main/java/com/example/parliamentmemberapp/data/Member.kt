@@ -15,5 +15,9 @@ data class Member(
     val bornYear: Int,
     val constituency: String){
 
+    var age: Int = Year.now().getValue() - bornYear
+
+
+    //TODO: Use the object ParliamentMembersData??
 
 }
