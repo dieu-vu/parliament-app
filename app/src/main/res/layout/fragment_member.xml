@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".MemberFragment">
+
+   <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/first_name"
+            android:text="@string/first_name"
+            style="@style/member_info_text" />
+
+        <TextView
+            android:id="@+id/last_name"
+            style="@style/member_info_text"
+            android:text="@string/last_name" />
+
+        <TextView
+            android:id="@+id/constituency"
+            style="@style/member_info_text"
+            android:text="@string/constituency" />
+
+        <TextView
+            android:id="@+id/age"
+            style="@style/member_info_text"
+            android:text="@string/age" />
+
+        <TextView
+            android:id="@+id/party"
+            style="@style/member_info_text"
+            android:text="@string/party" />
+    </LinearLayout>
+</layout>
