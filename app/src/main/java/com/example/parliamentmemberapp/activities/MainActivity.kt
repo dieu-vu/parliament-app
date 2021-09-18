@@ -1,9 +1,9 @@
-package com.example.parliamentmemberapp
+package com.example.parliamentmemberapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.DataBindingUtil
+import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
