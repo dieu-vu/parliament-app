@@ -29,8 +29,8 @@ class MemberViewModel: ViewModel(){
     }
 
     fun updateAgeText(): String{
-        val age = (parliamentMember?.bornYear)?.toString()
-        return "Age: \n ${age}"
+        val age = Calendar.getInstance().get(Calendar.YEAR) - (parliamentMember?.bornYear)
+        return "Age: \n ${age.toString()}"
     }
 
     fun updatePartyText(): String{
@@ -43,7 +43,10 @@ class MemberViewModel: ViewModel(){
     }
 
     fun getRandomMember(){
-        parliamentMember = (ParliamentMembersData.members).random()
+        var recent: Int? = null
+        val next = (ParliamentMembersData.members).indices.toSet().minus(setOfNotNull(recent)).random()
+        recent = next
+        parliamentMember = ParliamentMembersData.members[next]
     }
 
 
