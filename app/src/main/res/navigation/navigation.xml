@@ -12,9 +12,30 @@
         <action
             android:id="@+id/action_titleFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_partyListFragment"
+            app:destination="@id/partyListFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberFragment"
         android:name="com.example.parliamentmemberapp.memberDetails.MemberFragment"
         android:label="MemberFragment" />
+    <fragment
+        android:id="@+id/partyListFragment"
+        android:name="com.example.parliamentmemberapp.PartyListFragment"
+        android:label="fragment_party_list"
+        tools:layout="@layout/fragment_party_list" >
+        <action
+            android:id="@+id/action_partyListFragment_to_partyMemberFragment"
+            app:destination="@id/partyMemberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/partyMemberFragment"
+        android:name="com.example.parliamentmemberapp.PartyMemberFragment"
+        android:label="fragment_party_member"
+        tools:layout="@layout/fragment_party_member" >
+        <action
+            android:id="@+id/action_partyMemberFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+    </fragment>
 </navigation>
