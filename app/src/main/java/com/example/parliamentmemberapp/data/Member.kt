@@ -3,7 +3,7 @@ package com.example.parliamentmemberapp.data
 import java.time.Year
 import java.util.*
 
-data class Member(
+data class ParliamentMember(
     val personNumber: Int,
     val seatNumber: Int,
     val last: String,
@@ -15,7 +15,8 @@ data class Member(
     val bornYear: Int,
     val constituency: String){
 
-    var age: Int = Year.now().getValue() - bornYear
+    val age: String
+        get() = (Year.now().getValue() - this.bornYear).toString()
 
 
     //TODO: Use the object ParliamentMembersData??

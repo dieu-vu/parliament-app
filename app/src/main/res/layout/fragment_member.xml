@@ -6,7 +6,7 @@
     <data>
         <variable
             name="member"
-            type="com.example.parliamentmemberapp.data.Member" />
+            type="com.example.parliamentmemberapp.data.ParliamentMember" />
     </data>
    <LinearLayout
         android:gravity="center"
@@ -34,7 +34,7 @@
         <TextView
             android:id="@+id/age"
             style="@style/member_info_text"
-            android:text="@string/age" />
+            android:text="@{member.age}" />
 
         <TextView
             android:id="@+id/party"
