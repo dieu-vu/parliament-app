@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">ParliamentMemberApp</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Parliament Member App</string>
     <string name="view_info_text">Click to view member information</string>
     <string name="view_info_btn">View Member Info</string>
     <string name="first_name">First Name</string>

@@ -6,8 +6,10 @@
     <data>
         <variable
             name="member"
-            type="com.example.parliamentmemberapp.data.ParliamentMember" />
+            type="com.example.parliamentmemberapp.data.MemberOfParliament" />
     </data>
+
+<!--    TODO: Maybe add Scroll View?-->
    <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
