@@ -8,7 +8,7 @@ import java.util.*
 
 class MemberViewModel: ViewModel(){
 
-    private var parliamentMember: MemberOfParliament= (ParliamentMembersData.members).random()
+    private var parliamentMember: MemberOfParliament = (ParliamentMembersData.members).random()
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
@@ -42,8 +42,8 @@ class MemberViewModel: ViewModel(){
         return "$title"
     }
 
-    fun getRandomMember(): MemberOfParliament{
-        return (ParliamentMembersData.members).random()
+    fun getRandomMember(){
+        parliamentMember = (ParliamentMembersData.members).random()
     }
 
 
