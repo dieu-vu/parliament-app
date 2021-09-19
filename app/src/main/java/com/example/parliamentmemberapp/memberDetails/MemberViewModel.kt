@@ -8,10 +8,11 @@ import java.util.*
 
 class MemberViewModel: ViewModel(){
 
-    private val parliamentMember: MemberOfParliament = (ParliamentMembersData.members).random()
+    private lateinit var parliamentMember: MemberOfParliament
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
+        parliamentMember = (ParliamentMembersData.members).random()
     }
 
     override fun onCleared(){
@@ -19,12 +20,8 @@ class MemberViewModel: ViewModel(){
         Log.i("ViewModel", "MemberViewModel destroyed")
     }
 
-    fun updateFirstNameText(): String{
-        return "First Name: \n ${(parliamentMember?.first)?: "not found"}"
-    }
-
-    fun updateLastNameText(): String{
-        return "Last Name: \n ${(parliamentMember?.last)?: "not found"}"
+    fun updateNameText(): String{
+        return """${(parliamentMember?.first) ?: "not found"} ${(parliamentMember?.last) ?: "not found"}"""
     }
 
     fun updateConstituencyText(): String{

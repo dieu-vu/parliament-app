@@ -7,4 +7,5 @@
     <string name="constituency">Constituency</string>
     <string name="age">Age</string>
     <string name="party">Party</string>
+    <string name="view_other_member">View another member</string>
 </resources>

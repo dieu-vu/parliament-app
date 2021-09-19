@@ -26,11 +26,7 @@
            android:textColor="@color/teal_700"/>
 
        <TextView
-            android:id="@+id/first_name"
-            style="@style/member_info_text" />
-
-        <TextView
-            android:id="@+id/last_name"
+            android:id="@+id/name"
             style="@style/member_info_text" />
 
         <TextView
@@ -46,5 +42,11 @@
             android:id="@+id/party"
             style="@style/member_info_text"
             />
-    </LinearLayout>
+
+       <Button
+           android:id="@+id/view_other_member"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/view_other_member" />
+   </LinearLayout>
 </layout>

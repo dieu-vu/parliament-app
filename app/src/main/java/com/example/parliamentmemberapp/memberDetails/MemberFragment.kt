@@ -28,15 +28,21 @@ class MemberFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MemberViewModel::class.java)
 
         binding.apply {
-            firstName.text = viewModel.updateFirstNameText()
-            lastName.text = viewModel.updateLastNameText()
+            name.text = viewModel.updateNameText()
             constituency.text = viewModel.updateConstituencyText()
             age.text = viewModel.updateAgeText()
             party.text = viewModel.updatePartyText()
             ifMinister.text = viewModel.updateMemberTitle()
         }
 
+        binding.viewOtherMember.setOnClickListener{ view: View ->
+            onButtonClickedChangeData(view)
+        }
         return binding.root
+    }
+
+    fun onButtonClickedChangeData(view: View){
+        binding.invalidateAll()
     }
 
 
