@@ -43,6 +43,14 @@ class MemberFragment : Fragment() {
 
     fun onButtonClickedChangeData(view: View){
         binding.invalidateAll()
+        viewModel.getRandomMember()
+        binding.apply {
+            name.text = viewModel.updateNameText()
+            constituency.text = viewModel.updateConstituencyText()
+            age.text = viewModel.updateAgeText()
+            party.text = viewModel.updatePartyText()
+            ifMinister.text = viewModel.updateMemberTitle()
+        }
     }
 
 

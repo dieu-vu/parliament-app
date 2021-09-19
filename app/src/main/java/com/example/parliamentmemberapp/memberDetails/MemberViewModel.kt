@@ -8,11 +8,11 @@ import java.util.*
 
 class MemberViewModel: ViewModel(){
 
-    private lateinit var parliamentMember: MemberOfParliament
+    private var parliamentMember: MemberOfParliament= (ParliamentMembersData.members).random()
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
-        parliamentMember = (ParliamentMembersData.members).random()
+
     }
 
     override fun onCleared(){
@@ -40,6 +40,10 @@ class MemberViewModel: ViewModel(){
     fun updateMemberTitle(): String{
         val title = if((parliamentMember?.minister)?: false) "Minister" else "Member of Parliament"
         return "$title"
+    }
+
+    fun getRandomMember(): MemberOfParliament{
+        return (ParliamentMembersData.members).random()
     }
 
 
