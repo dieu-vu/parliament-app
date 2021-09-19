@@ -27,7 +27,15 @@ class MemberFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(MemberViewModel::class.java)
 
-        binding.member = viewModel.person1
+        binding.member = viewModel.parliamentMember
+        binding.apply {
+            firstName.text = viewModel.updateFirstNameText(member)
+            lastName.text = viewModel.updateLastNameText(member)
+            constituency.text = viewModel.updateConstituencyText(member)
+            age.text = viewModel.updateAgeText(member)
+            party.text = viewModel.updatePartyText(member)
+            ifMinister.text = viewModel.updateMemberTitle(member)
+        }
 
 
     //TODO: Add function to display data -> to add ViewModel to handle this, fragment only takes care of View
