@@ -1,4 +1,4 @@
-package com.example.parliamentmemberapp.activities
+package com.example.parliamentmemberapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

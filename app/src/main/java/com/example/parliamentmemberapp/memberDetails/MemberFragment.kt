@@ -1,4 +1,4 @@
-package com.example.parliamentmemberapp.fragments
+package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,14 +13,6 @@ import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
 
 class MemberFragment : Fragment() {
 
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +26,7 @@ class MemberFragment : Fragment() {
         binding.member = person1
 
 
-    //TODO: Add function to display data
+    //TODO: Add function to display data -> to add ViewModel to handle this, fragment only takes care of View
         return binding.root
     }
 

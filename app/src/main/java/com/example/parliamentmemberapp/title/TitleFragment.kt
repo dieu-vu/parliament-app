@@ -1,4 +1,4 @@
-package com.example.parliamentmemberapp.fragments
+package com.example.parliamentmemberapp.title
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -6,7 +6,7 @@
     app:startDestination="@id/titleFragment">
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.example.parliamentmemberapp.fragments.TitleFragment"
+        android:name="com.example.parliamentmemberapp.title.TitleFragment"
         android:label="fragment_title"
         tools:layout="@layout/fragment_title" >
         <action
@@ -15,6 +15,6 @@
     </fragment>
     <fragment
         android:id="@+id/memberFragment"
-        android:name="com.example.parliamentmemberapp.fragments.MemberFragment"
+        android:name="com.example.parliamentmemberapp.memberDetails.MemberFragment"
         android:label="MemberFragment" />
 </navigation>
