@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.data.MemberOfParliament
@@ -27,30 +28,26 @@ class MemberFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(MemberViewModel::class.java)
 
-        binding.apply {
-            name.text = viewModel.updateNameText()
-            constituency.text = viewModel.updateConstituencyText()
-            age.text = viewModel.updateAgeText()
-            party.text = viewModel.updatePartyText()
-            ifMinister.text = viewModel.updateMemberTitle()
-        }
 
         binding.viewOtherMember.setOnClickListener{ view: View ->
             onButtonClickedChangeData(view)
         }
+
+        viewModel.parliamentMember.observe(this, Observer{newMember ->
+            binding.apply {
+                name.text = viewModel.updateNameText()
+                constituency.text = viewModel.updateConstituencyText()
+                age.text = viewModel.updateAgeText()
+                party.text = viewModel.updatePartyText()
+                ifMinister.text = viewModel.updateMemberTitle()
+            }
+        })
         return binding.root
     }
 
     fun onButtonClickedChangeData(view: View){
         binding.invalidateAll()
         viewModel.getRandomMember()
-        binding.apply {
-            name.text = viewModel.updateNameText()
-            constituency.text = viewModel.updateConstituencyText()
-            age.text = viewModel.updateAgeText()
-            party.text = viewModel.updatePartyText()
-            ifMinister.text = viewModel.updateMemberTitle()
-        }
     }
 
 
