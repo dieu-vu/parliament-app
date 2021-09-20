@@ -1,6 +1,7 @@
 package com.example.parliamentmemberapp.memberDetails
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.parliamentmemberapp.data.MemberOfParliament
@@ -9,15 +10,17 @@ import java.util.*
 
 class MemberViewModel: ViewModel(){
 
-    var parliamentMember = MutableLiveData<MemberOfParliament>()
+    private val _parliamentMember = MutableLiveData<MemberOfParliament>()
+    val parliamentMember: LiveData<MemberOfParliament> //Encapsulate LiveData
+        get() = _parliamentMember
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
-        parliamentMember.value = (ParliamentMembersData.members).random()
+        _parliamentMember.value = (ParliamentMembersData.members).random() //I feel st is wrong here??!
     }
 
     /*TODO: Convert to LiveData
-    - Each variable are updated separately, so the UI only updates exactly the ones which change.
+    - Each variable are updated separately, so the UI only updates exactly the ones which change -> good or not?
     - Find out how to handle nullable most efficiently.
     */
 
@@ -28,32 +31,34 @@ class MemberViewModel: ViewModel(){
     }
 
     fun updateNameText(): String{
-        return """${(parliamentMember.value?.first) ?: "not found"} ${(parliamentMember.value?.last) ?: "not found"}"""
+        return """${(_parliamentMember.value?.first) ?: "not found"} ${(_parliamentMember.value?.last) ?: "not found"}"""
     }
 
     fun updateConstituencyText(): String{
-        return "Constituency: \n ${(parliamentMember.value?.constituency)?: "not found"}"
+        return "Constituency: \n ${(_parliamentMember.value?.constituency)?: "not found"}"
     }
 
     fun updateAgeText(): String{
-        val age = Calendar.getInstance().get(Calendar.YEAR) - (parliamentMember.value?.bornYear!!)
+        val age = Calendar.getInstance().get(Calendar.YEAR) - (_parliamentMember.value?.bornYear!!)
         return "Age: \n ${age}"
     }
 
     fun updatePartyText(): String{
-        return "Party: \n ${(parliamentMember.value?.party)?: "not found"}"
+        return "Party: \n ${(_parliamentMember.value?.party)?: "not found"}"
     }
 
+    //Display title if Minister or Member
     fun updateMemberTitle(): String{
-        val title = if((parliamentMember.value?.minister)?: false) "Minister" else "Member of Parliament"
+        val title = if((_parliamentMember.value?.minister)?: false) "Minister" else "Member of Parliament"
         return "$title"
     }
 
+    //Get random member non-repeatedly
     fun getRandomMember(){
         var recent: Int? = null
         val next = (ParliamentMembersData.members).indices.toSet().minus(setOfNotNull(recent)).random()
         recent = next
-        parliamentMember.value = ParliamentMembersData.members[next]
+        _parliamentMember.value = ParliamentMembersData.members[next]
     }
 
 

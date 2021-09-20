@@ -45,7 +45,7 @@ class MemberFragment : Fragment() {
         return binding.root
     }
 
-    fun onButtonClickedChangeData(view: View){
+    private fun onButtonClickedChangeData(view: View){
         binding.invalidateAll()
         viewModel.getRandomMember()
     }
