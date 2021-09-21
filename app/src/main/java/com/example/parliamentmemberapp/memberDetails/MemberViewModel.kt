@@ -16,11 +16,10 @@ class MemberViewModel: ViewModel(){
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
-        _parliamentMember.value = (ParliamentMembersData.members).random() //I feel st is wrong here??!
+        _parliamentMember.value = getRandomMember() //get a random member from list without repetition
     }
 
-    /*TODO: Convert to LiveData
-    - Each variable are updated separately, so the UI only updates exactly the ones which change -> good or not?
+    /*TODO: Check if Each variable are updated separately, so the UI only updates exactly the ones which change -> good or not?
     - Find out how to handle nullable most efficiently.
     */
 
@@ -54,11 +53,12 @@ class MemberViewModel: ViewModel(){
     }
 
     //Get random member non-repeatedly
-    fun getRandomMember(){
+    fun getRandomMember(): MemberOfParliament{
         var recent: Int? = null
         val next = (ParliamentMembersData.members).indices.toSet().minus(setOfNotNull(recent)).random()
         recent = next
         _parliamentMember.value = ParliamentMembersData.members[next]
+        return ParliamentMembersData.members[next]
     }
 
 
