@@ -39,7 +39,7 @@ class MemberViewModel: ViewModel(){
 
     fun updateAgeText(): String{
         val age = Calendar.getInstance().get(Calendar.YEAR) - (_parliamentMember.value?.bornYear!!)
-        return "Age: \n ${age}"
+        return "Age: \n $age"
     }
 
     fun updatePartyText(): String{
@@ -48,7 +48,7 @@ class MemberViewModel: ViewModel(){
 
     //Display title if Minister or Member
     fun updateMemberTitle(): String{
-        val title = if((_parliamentMember.value?.minister)?: false) "Minister" else "Member of Parliament"
+        val title = if((_parliamentMember.value?.minister) == false) "Minister" else "Member of Parliament"
         return "$title"
     }
 
