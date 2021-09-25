@@ -1,9 +1,13 @@
 package com.example.parliamentmemberapp.data
 
+import androidx.room.*
 import java.time.Year
 import java.util.*
 
+@Entity
 data class MemberOfParliament (
+
+    @PrimaryKey
     val personNumber: Int,
     val seatNumber: Int = 0,
     val last: String,
