@@ -10,7 +10,7 @@ import java.util.*
 
 class MemberViewModel: ViewModel(){
 
-    private val _parliamentMember = MutableLiveData<MemberOfParliament>()
+    private val _parliamentMember = MutableLiveData<MemberOfParliament>() //make a backing property
     val parliamentMember: LiveData<MemberOfParliament> //Encapsulate LiveData
         get() = _parliamentMember
 
@@ -18,11 +18,6 @@ class MemberViewModel: ViewModel(){
         Log.i("ViewModel", "MemberViewModel created!")
         _parliamentMember.value = getRandomMember() //get a random member from list without repetition
     }
-
-    /*TODO: Check if Each variable are updated separately, so the UI only updates exactly the ones which change -> good or not?
-    - Find out how to handle nullable most efficiently.
-    */
-
 
     override fun onCleared(){
         super.onCleared()
@@ -48,8 +43,8 @@ class MemberViewModel: ViewModel(){
 
     //Display title if Minister or Member
     fun updateMemberTitle(): String{
-        val title = if((_parliamentMember.value?.minister) == false) "Minister" else "Member of Parliament"
-        return "$title"
+        val title = if((_parliamentMember.value?.minister) == false) "Member of Parliament" else "Minister"
+        return title
     }
 
     //Get random member non-repeatedly
