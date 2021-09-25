@@ -30,11 +30,8 @@ class MemberFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MemberViewModel::class.java)
 
         binding.memberViewModel = viewModel
+        binding.setLifecycleOwner(this)
 
-//        binding.viewOtherMember.setOnClickListener{ view: View ->
-//            onButtonClickedChangeData(view)
-//        }
-//
         viewModel.parliamentMember.observe(this, Observer{newMember ->
             binding.apply {
                 name.text = viewModel.updateNameText()
@@ -46,11 +43,6 @@ class MemberFragment : Fragment() {
         })
         return binding.root
     }
-
-//    private fun onButtonClickedChangeData(view: View){
-//        binding.invalidateAll()
-//        viewModel.getRandomMember()
-//    }
 
 
 }

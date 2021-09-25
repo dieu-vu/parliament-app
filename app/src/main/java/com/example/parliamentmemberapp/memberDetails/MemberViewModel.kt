@@ -14,6 +14,7 @@ class MemberViewModel: ViewModel(){
     val parliamentMember: LiveData<MemberOfParliament> //Encapsulate LiveData
         get() = _parliamentMember
 
+
     init{
         Log.i("ViewModel", "MemberViewModel created!")
         _parliamentMember.value = getRandomMember() //get a random member from list without repetition
@@ -33,8 +34,9 @@ class MemberViewModel: ViewModel(){
     }
 
     fun updateAgeText(): String{
-        val age = Calendar.getInstance().get(Calendar.YEAR) - (_parliamentMember.value?.bornYear!!)
-        return "Age: \n $age"
+        val age: Int = (Calendar.getInstance().get(Calendar.YEAR) -
+                (_parliamentMember.value?.bornYear ?: 0))
+        return if (age < Calendar.getInstance().get(Calendar.YEAR)) "Age: \n $age" else "Age: \n not found"
     }
 
     fun updatePartyText(): String{
