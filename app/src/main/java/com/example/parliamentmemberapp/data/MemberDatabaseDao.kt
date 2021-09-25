@@ -6,10 +6,10 @@ import androidx.room.*
 @Dao
 interface MemberDatabaseDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(member: MemberOfParliament)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(member: MemberOfParliament)
 
     @Query("SELECT * FROM MemberOfParliament")
