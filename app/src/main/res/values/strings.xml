@@ -10,6 +10,7 @@
     <string name="view_other_member">View another member</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="upVote_bth">Upvote Button</string>
-    <string name="downVote_btn">Downvote Button</string>
+    <string name="upVote_bth">Upvote</string>
+    <string name="downVote_btn">Downvote</string>
+    <string name="view_party_list">View Party List</string>
 </resources>

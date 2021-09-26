@@ -31,12 +31,13 @@
 
         <Button
             android:id="@+id/view_info_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
             android:text="@string/view_info_btn"
-            />
+            style="@style/view_buttons" />
+
+        <Button
+            android:id="@+id/view_party_list"
+            style="@style/view_buttons"
+            android:text="@string/view_party_list" />
 
     </LinearLayout>
 

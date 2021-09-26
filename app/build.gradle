@@ -58,5 +58,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$version_navigation")
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
+    implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
 
 }

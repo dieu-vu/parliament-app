@@ -6,25 +6,48 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.parliamentmemberapp.data.MemberDatabaseDao
-import com.example.parliamentmemberapp.data.MemberOfParliament
-import com.example.parliamentmemberapp.data.ParliamentMembersData
+import com.example.parliamentmemberapp.data.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class MemberViewModel (
 //    val database: MemberDatabaseDao,
 //    application: Application
-    ): ViewModel() {//AndroidViewModel(application){
+    ): ViewModel (){//AndroidViewModel(application){
 
+    //private val members = database.getAllMembers()
+    private val members = ParliamentMembersData.members
     private val _parliamentMember = MutableLiveData<MemberOfParliament>() //make a backing property
     val parliamentMember: LiveData<MemberOfParliament> //Encapsulate LiveData
         get() = _parliamentMember
+    private var recentPickedIndex: Int? = null
 
+//    val _response = MutableLiveData<String>()
+//    val response: LiveData<String>
+//        get() = _response
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
         _parliamentMember.value = getRandomMember() //get a random member from list without repetition
     }
+
+    //Call the ParliamentApiService to enqueue the Retrofit request, implementing the callbacks
+//    private fun getParliamentProperties(){
+//        //Start network request on a background thread
+//        ParliamentApi.retrofitService.getProperties().enqueue(object: Callback<String> {
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                _response.value = response.body()
+//            }
+//
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                _response.value = "Failure: " + t.message
+//            }
+//        })
+//        _response.value = ""
+//    }
+
 
     override fun onCleared(){
         super.onCleared()
@@ -56,12 +79,25 @@ class MemberViewModel (
     }
 
     //Get random member non-repeatedly
-    fun getRandomMember(): MemberOfParliament{
-        var recent: Int? = null
-        val next = (ParliamentMembersData.members).indices.toSet().minus(setOfNotNull(recent)).random()
-        recent = next
-        _parliamentMember.value = ParliamentMembersData.members[next]
-        return ParliamentMembersData.members[next]
+//    fun getRandomMember(): MemberOfParliament? {
+//        val next = members.value?.indices?.toSet()?.minus(setOfNotNull(recentPickedIndex))?.random()
+//        recentPickedIndex = next
+//        val pickedMember: MemberOfParliament? = next?.let { members.value?.get(it).also { _parliamentMember.value = it } }
+//        return pickedMember
+//    }
+    fun getRandomMember(): MemberOfParliament {
+        val next = members.indices.toSet().minus(setOfNotNull(recentPickedIndex)).random()
+        recentPickedIndex = next
+        val pickedMember: MemberOfParliament = next?.let { members.get(it).also { _parliamentMember.value = it } }
+        return pickedMember
+    }
+
+    fun liked(){
+        (_parliamentMember.value?.reactionPoints?: 0).plus(1)
+    }
+
+    fun disliked(){
+        (_parliamentMember.value?.reactionPoints?: 0).minus(1)
     }
 
 
