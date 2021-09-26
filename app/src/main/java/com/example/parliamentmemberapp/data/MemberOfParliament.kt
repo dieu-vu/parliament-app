@@ -1,8 +1,6 @@
 package com.example.parliamentmemberapp.data
 
 import androidx.room.*
-import java.time.Year
-import java.util.*
 
 @Entity
 data class MemberOfParliament (

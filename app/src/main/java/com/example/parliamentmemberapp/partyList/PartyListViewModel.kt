@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.parliamentmemberapp.data.MemberDatabaseDao
+import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.data.ParliamentApi
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,12 +26,12 @@ class PartyListViewModel: ViewModel (){
     //Call the ParliamentApiService to enqueue the Retrofit request, implementing the callbacks
     private fun getParliamentProperties(){
         //Start network request on a background thread
-        ParliamentApi.retrofitService.getProperties().enqueue(object: Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
+        ParliamentApi.retrofitService.getProperties().enqueue(object: Callback<List<MemberOfParliament>> {
+            override fun onResponse(call: Call<List<MemberOfParliament>>, response: Response<List<MemberOfParliament>>) {
+                _response.value = "Success: ${response.body()?.size} members retrieved"
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<List<MemberOfParliament>>, t: Throwable) {
                 _response.value = "Failure: " + t.message
             }
         })
