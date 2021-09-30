@@ -15,7 +15,7 @@ class MemberViewModelFactory
         if (modelClass.isAssignableFrom(MemberViewModelFactory::class.java)) {
             return MemberViewModelFactory(dataSource, application) as T
         }
-        throw IllegalArgumentException("Uknown ViewModel class")
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 
 }

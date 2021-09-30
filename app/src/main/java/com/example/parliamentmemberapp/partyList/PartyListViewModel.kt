@@ -9,11 +9,19 @@ import androidx.lifecycle.ViewModel
 import com.example.parliamentmemberapp.data.MemberDatabaseDao
 import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.data.ParliamentApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.reflect.typeOf
 
-class PartyListViewModel: ViewModel (){
+class PartyListViewModel: ViewModel () {
+
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
@@ -26,15 +34,15 @@ class PartyListViewModel: ViewModel (){
     //Call the ParliamentApiService to enqueue the Retrofit request, implementing the callbacks
     private fun getParliamentProperties(){
         //Start network request on a background thread
-        ParliamentApi.retrofitService.getProperties().enqueue(object: Callback<List<MemberOfParliament>> {
-            override fun onResponse(call: Call<List<MemberOfParliament>>, response: Response<List<MemberOfParliament>>) {
-                _response.value = "Success: ${response.body()?.size} members retrieved"
+        coroutineScope.launch {
+            var getMemberDataDeferred = ParliamentApi.retrofitService.getProperties()
+            try{
+                var listResult = getMemberDataDeferred.await()
+                _response.value = "Success: get ${listResult.size} instances of class ${(listResult[0]::class.simpleName)}"
+            } catch (e: Exception){
+                    _response.value = "Failure: " + e.message
             }
+        }
 
-            override fun onFailure(call: Call<List<MemberOfParliament>>, t: Throwable) {
-                _response.value = "Failure: " + t.message
-            }
-        })
-        _response.value = ""
     }
 }

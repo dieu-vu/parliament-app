@@ -18,7 +18,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 //TODO: Add Up button and Menu
 
-@InternalCoroutinesApi
 class MemberFragment : Fragment() {
 
     private lateinit var memberViewModel: MemberViewModel
@@ -37,7 +36,7 @@ class MemberFragment : Fragment() {
 //        val dataSource = getInstance(application).memberDatabaseDao
 //        val viewModelFactory = MemberViewModelFactory(dataSource, application)
 //
-//        val memberViewModel = ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
+//      memberViewModel = ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
         memberViewModel = ViewModelProviders.of(this).get(MemberViewModel::class.java)
 //
         binding.memberViewModel = memberViewModel

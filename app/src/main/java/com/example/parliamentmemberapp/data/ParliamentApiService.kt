@@ -1,7 +1,9 @@
 package com.example.parliamentmemberapp.data
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -14,6 +16,7 @@ private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi)) //Retrofit can use Moshi to convert JSON response to Kotlin objects
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
 
@@ -21,7 +24,7 @@ private val retrofit = Retrofit.Builder()
 interface ParliamentApiService {
     @GET("mps.json")
     fun getProperties():
-            Call<List<MemberOfParliament>>
+            Deferred<List<MemberOfParliament>>
 }
 
 //Create the ParliamentApi object using Retrofit to implement the ParliamentApiService

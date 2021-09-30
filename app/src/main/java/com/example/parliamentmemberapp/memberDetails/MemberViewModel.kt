@@ -2,10 +2,7 @@ package com.example.parliamentmemberapp.memberDetails
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.parliamentmemberapp.data.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,29 +21,14 @@ class MemberViewModel (
         get() = _parliamentMember
     private var recentPickedIndex: Int? = null
 
-//    val _response = MutableLiveData<String>()
-//    val response: LiveData<String>
-//        get() = _response
+    //TODO: Use Transformations to build strings displayed for each member information:
+
 
     init{
         Log.i("ViewModel", "MemberViewModel created!")
         _parliamentMember.value = getRandomMember() //get a random member from list without repetition
     }
 
-    //Call the ParliamentApiService to enqueue the Retrofit request, implementing the callbacks
-//    private fun getParliamentProperties(){
-//        //Start network request on a background thread
-//        ParliamentApi.retrofitService.getProperties().enqueue(object: Callback<String> {
-//            override fun onResponse(call: Call<String>, response: Response<String>) {
-//                _response.value = response.body()
-//            }
-//
-//            override fun onFailure(call: Call<String>, t: Throwable) {
-//                _response.value = "Failure: " + t.message
-//            }
-//        })
-//        _response.value = ""
-//    }
 
 
     override fun onCleared(){
@@ -54,7 +36,7 @@ class MemberViewModel (
         Log.i("ViewModel", "MemberViewModel destroyed")
     }
 
-    fun updateNameText(): String{
+    fun updateNameText(): String {
         return """${(_parliamentMember.value?.first) ?: "not found"} ${(_parliamentMember.value?.last) ?: "not found"}"""
     }
 
@@ -92,13 +74,7 @@ class MemberViewModel (
         return pickedMember
     }
 
-    fun liked(){
-        (_parliamentMember.value?.reactionPoints?: 0).plus(1)
-    }
 
-    fun disliked(){
-        (_parliamentMember.value?.reactionPoints?: 0).minus(1)
-    }
 
 
 }

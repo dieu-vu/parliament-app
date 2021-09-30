@@ -69,14 +69,12 @@
                    android:id="@+id/upVote_btn"
                    android:contentDescription="@string/upVote_bth"
                    app:srcCompat="@drawable/ic_thumbsup"
-                   style="@style/vote_btn"
-                   android:onClick="@{() -> memberViewModel.liked()}" />
+                   style="@style/vote_btn"/>
                <ImageButton
                    android:id="@+id/downVote_btn"
                    android:contentDescription="@string/downVote_btn"
                    app:srcCompat="@drawable/ic_thumbsdown"
-                   style="@style/vote_btn"
-                   android:onClick="@{() -> memberViewModel.disliked()}" />
+                   style="@style/vote_btn"/>
             </LinearLayout>
        </LinearLayout>
     </ScrollView>
