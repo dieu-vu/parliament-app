@@ -1,5 +1,7 @@
 package com.example.parliamentmemberapp.repository
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.example.parliamentmemberapp.MyApp
 import com.example.parliamentmemberapp.data.MemberDatabase
@@ -21,21 +23,9 @@ class MemberDataRepository (private val database: MemberDatabase) {
         }
     }
 
-    suspend fun newEntry(){
-        dao.insert(
-            MemberOfParliament(
-                personNumber = 1467,
-                seatNumber = 64,
-                last = "Huru",
-                first = "Petri",
-                party = "ps",
-                minister = false,
-                picture = "attachment/member/pictures/Huru-Petri-web-v0003-1467.jpg",
-                twitter = "https://twitter.com/HuruPetri",
-                bornYear = 1966,
-                constituency = "Satakunta",
-            )
-        )
+    suspend fun insertEntry(member: MemberOfParliament){
+        dao.insert(member)
+        Log.i( "ZZZ","added an entry")
     }
 
 

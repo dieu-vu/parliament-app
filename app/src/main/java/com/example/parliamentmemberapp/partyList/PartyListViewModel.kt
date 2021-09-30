@@ -1,9 +1,11 @@
 package com.example.parliamentmemberapp.partyList
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.parliamentmemberapp.MyApp
 import com.example.parliamentmemberapp.data.MemberDatabase.Companion.getInstance
+import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.data.ParliamentApi
 import com.example.parliamentmemberapp.repository.MemberDataRepository
 import kotlinx.coroutines.CoroutineScope
@@ -24,10 +26,23 @@ class PartyListViewModel(application: Application): AndroidViewModel(application
     val response: LiveData<String>
         get() = _response
 
+    val testMember = MemberOfParliament(
+        personNumber = 1467,
+        seatNumber = 64,
+        last = "Huru",
+        first = "Petri",
+        party = "ps",
+        minister = false,
+        picture = "attachment/member/pictures/Huru-Petri-web-v0003-1467.jpg",
+        twitter = "https://twitter.com/HuruPetri",
+        bornYear = 1966,
+        constituency = "Satakunta",
+    )
+
     init {
         viewModelScope.launch {
             //memberRepository.refreshDatabase()
-            memberRepository.newEntry()
+            memberRepository.insertEntry(testMember)
         }
     }
     val memberList = memberRepository.memberList.value
@@ -48,4 +63,6 @@ class PartyListViewModel(application: Application): AndroidViewModel(application
         }
 
     }
+
+
 }
