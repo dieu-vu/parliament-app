@@ -1,35 +1,38 @@
 package com.example.parliamentmemberapp.partyList
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.parliamentmemberapp.data.MemberDatabaseDao
-import com.example.parliamentmemberapp.data.MemberOfParliament
+import androidx.lifecycle.*
+import com.example.parliamentmemberapp.MyApp
+import com.example.parliamentmemberapp.data.MemberDatabase.Companion.getInstance
 import com.example.parliamentmemberapp.data.ParliamentApi
+import com.example.parliamentmemberapp.repository.MemberDataRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.reflect.typeOf
 
-class PartyListViewModel: ViewModel () {
+
+class PartyListViewModel(application: Application): AndroidViewModel(application) {
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    private val database = getInstance(application)
+    private val memberRepository = MemberDataRepository(database)
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
         get() = _response
 
     init {
-        getParliamentProperties()
+        viewModelScope.launch {
+            //memberRepository.refreshDatabase()
+            memberRepository.newEntry()
+        }
     }
+    val memberList = memberRepository.memberList.value
+    val textDisplayed = memberList?.size.toString()
+
 
     //Call the ParliamentApiService to enqueue the Retrofit request, implementing the callbacks
     private fun getParliamentProperties(){

@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.internal.synchronized
-import java.lang.reflect.Member
+import com.example.parliamentmemberapp.MyApp
 
 @Database(entities = [MemberOfParliament::class], version =1, exportSchema = false)
 abstract class MemberDatabase: RoomDatabase() {
@@ -17,7 +15,6 @@ abstract class MemberDatabase: RoomDatabase() {
         @Volatile //changes made to variable INSTANCE are visible to other threads immediately
         private var INSTANCE: MemberDatabase? = null
 
-        @InternalCoroutinesApi
         fun getInstance(context: Context): MemberDatabase{
             synchronized(this){
                 var instance = INSTANCE
