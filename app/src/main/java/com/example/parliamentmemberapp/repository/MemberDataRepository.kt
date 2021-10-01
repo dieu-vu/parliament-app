@@ -18,8 +18,9 @@ class MemberDataRepository (private val database: MemberDatabase) {
 
     suspend fun refreshDatabase() {
         withContext(Dispatchers.IO) {
-        val memberList = ParliamentApi.retrofitService.getProperties().await()
-        dao.insertAll(memberList)
+            val memberList = ParliamentApi.retrofitService.getProperties().await()
+//            dao.insertAll(memberList)
+            memberList.forEach { it -> dao.insert(it) }
         }
     }
 

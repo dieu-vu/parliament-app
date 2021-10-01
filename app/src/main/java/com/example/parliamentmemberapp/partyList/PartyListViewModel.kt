@@ -41,8 +41,9 @@ class PartyListViewModel(application: Application): AndroidViewModel(application
 
     init {
         viewModelScope.launch {
-            //memberRepository.refreshDatabase()
-            memberRepository.insertEntry(testMember)
+            memberRepository.refreshDatabase()
+  //          memberRepository.insertEntry(testMember)
+//            getParliamentProperties()
         }
     }
     val memberList = memberRepository.memberList.value
