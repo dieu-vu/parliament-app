@@ -9,9 +9,6 @@ interface MemberDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(member: MemberOfParliament)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(memberList: List<MemberOfParliament>)
-
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(member: MemberOfParliament)
 

@@ -15,6 +15,7 @@ class MemberDataRepository (private val database: MemberDatabase) {
     private val dao = database.memberDatabaseDao
 
     val memberList: LiveData<List<MemberOfParliament>> = dao.getAllMembers()
+    val partyList: LiveData<List<String>> = dao.getPartyList()
 
     suspend fun refreshDatabase() {
         withContext(Dispatchers.IO) {
@@ -28,6 +29,8 @@ class MemberDataRepository (private val database: MemberDatabase) {
         dao.insert(member)
         Log.i( "ZZZ","added an entry")
     }
+
+
 
 
 }

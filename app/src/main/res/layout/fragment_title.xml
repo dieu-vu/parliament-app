@@ -4,6 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".title.TitleFragment">
 
+    <data>
+        <variable
+            name="TitleViewModel"
+            type="com.example.parliamentmemberapp.title.TitleViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

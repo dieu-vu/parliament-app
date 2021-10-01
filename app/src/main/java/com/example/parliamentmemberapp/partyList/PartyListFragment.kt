@@ -27,6 +27,10 @@ class PartyListFragment : Fragment() {
         // Giving the binding access to the PartyListViewModel
         binding.viewModel = viewModel
 
+        viewModel.partyList.observe( this, {it ->
+            binding.partyList.text = it.toString()}
+        )
+
 
         setHasOptionsMenu(true)
         return binding.root
