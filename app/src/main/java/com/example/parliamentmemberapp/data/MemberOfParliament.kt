@@ -1,7 +1,6 @@
 package com.example.parliamentmemberapp.data
 
 import androidx.room.*
-import com.squareup.moshi.Json
 
 @Entity
 data class MemberOfParliament (
@@ -12,7 +11,7 @@ data class MemberOfParliament (
     val first: String,
     val party: String,
     val minister: Boolean = false,
-    @Json(name = "img_src")
+
     val picture: String = "",
     val twitter: String = "",
     val bornYear: Int = 0,
