@@ -3,10 +3,11 @@ package com.example.parliamentmemberapp.memberDetails
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.parliamentmemberapp.data.MemberDatabase
 import com.example.parliamentmemberapp.data.MemberDatabaseDao
 
 class MemberViewModelFactory
-    (private val dataSource: MemberDatabaseDao,
+    (private val dataSource: MemberDatabase,
      private val application: Application
 ) : ViewModelProvider.Factory {
 

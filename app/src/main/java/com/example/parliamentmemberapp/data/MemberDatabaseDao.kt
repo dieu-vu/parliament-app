@@ -1,6 +1,7 @@
 package com.example.parliamentmemberapp.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao
@@ -20,6 +21,10 @@ interface MemberDatabaseDao {
 
     @Query("SELECT * FROM MemberOfParliament WHERE party= :partyName")
     fun getPartyMemberList(partyName: String): LiveData<List<MemberOfParliament>>
+
+    @Query("SELECT * FROM MemberOfParliament ORDER BY RANDOM() LIMIT 1")
+    fun getRandomMember(): LiveData<MemberOfParliament>
+
 
     @Query("DELETE FROM MemberOfParliament")
     suspend fun clearData()

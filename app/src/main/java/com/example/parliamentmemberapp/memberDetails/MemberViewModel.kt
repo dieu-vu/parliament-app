@@ -4,77 +4,52 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.parliamentmemberapp.data.*
+import com.example.parliamentmemberapp.repository.MemberDataRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class MemberViewModel (
-//    val database: MemberDatabaseDao,
-//    application: Application
-    ): ViewModel (){//AndroidViewModel(application){
+class MemberViewModel (application: Application): AndroidViewModel(application){
 
-    //private val members = database.getAllMembers()
-    private val members = ParliamentMembersData.members
-    private val _parliamentMember = MutableLiveData<MemberOfParliament>() //make a backing property
-    val parliamentMember: LiveData<MemberOfParliament> //Encapsulate LiveData
-        get() = _parliamentMember
-    private var recentPickedIndex: Int? = null
+    private val database = MemberDatabase.getInstance(application)
 
-    //TODO: Use Transformations to build strings displayed for each member information:
+    lateinit var parliamentMember: LiveData<MemberOfParliament>
 
 
     init{
-        Log.i("ViewModel", "MemberViewModel created!")
-        _parliamentMember.value = getRandomMember() //get a random member from list without repetition
+        Log.i("ZZZ", "MemberViewModel created!")
+        selectNewMember()
     }
 
-
-
-    override fun onCleared(){
-        super.onCleared()
-        Log.i("ViewModel", "MemberViewModel destroyed")
+    fun selectNewMember (){
+        parliamentMember = database.memberDatabaseDao.getRandomMember()
     }
+
 
     fun updateNameText(): String {
-        return """${(_parliamentMember.value?.first) ?: "not found"} ${(_parliamentMember.value?.last) ?: "not found"}"""
+        return """${(parliamentMember.value?.first) ?: "not found"} ${(parliamentMember.value?.last) ?: "not found"}"""
     }
 
     fun updateConstituencyText(): String{
-        return "Constituency: \n ${(_parliamentMember.value?.constituency)?: "not found"}"
+        return "Constituency: \n ${(parliamentMember.value?.constituency)?: "not found"}"
     }
 
     fun updateAgeText(): String{
         val age: Int = (Calendar.getInstance().get(Calendar.YEAR) -
-                (_parliamentMember.value?.bornYear ?: 0))
+                (parliamentMember.value?.bornYear ?: 0))
         return if (age < Calendar.getInstance().get(Calendar.YEAR)) "Age: \n $age" else "Age: \n not found"
     }
 
     fun updatePartyText(): String{
-        return "Party: \n ${(_parliamentMember.value?.party)?: "not found"}"
+        return "Party: \n ${(parliamentMember.value?.party)?: "not found"}"
     }
 
     //Display title if Minister or Member
     fun updateMemberTitle(): String{
-        val title = if((_parliamentMember.value?.minister) == false) "Member of Parliament" else "Minister"
-        return title
+        return if((parliamentMember.value?.minister) == false) "Member of Parliament" else "Minister"
+
     }
-
-    //Get random member non-repeatedly
-//    fun getRandomMember(): MemberOfParliament? {
-//        val next = members.value?.indices?.toSet()?.minus(setOfNotNull(recentPickedIndex))?.random()
-//        recentPickedIndex = next
-//        val pickedMember: MemberOfParliament? = next?.let { members.value?.get(it).also { _parliamentMember.value = it } }
-//        return pickedMember
-//    }
-    fun getRandomMember(): MemberOfParliament {
-        val next = members.indices.toSet().minus(setOfNotNull(recentPickedIndex)).random()
-        recentPickedIndex = next
-        val pickedMember: MemberOfParliament = next?.let { members.get(it).also { _parliamentMember.value = it } }
-        return pickedMember
-    }
-
-
 
 
 }

@@ -11,7 +11,6 @@ data class MemberOfParliament (
     val first: String,
     val party: String,
     val minister: Boolean = false,
-
     val picture: String = "",
     val twitter: String = "",
     val bornYear: Int = 0,

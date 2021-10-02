@@ -41,8 +41,19 @@ class MemberFragment : Fragment() {
 //
         binding.memberViewModel = memberViewModel
         binding.lifecycleOwner = this
-//
-        memberViewModel.parliamentMember.observe(this, Observer{newMember ->
+
+        updateMemberViewUI(binding, memberViewModel)
+
+        binding.viewOtherMember.setOnClickListener() {
+            binding.invalidateAll()
+            memberViewModel.selectNewMember()
+            updateMemberViewUI(binding, memberViewModel)
+        }
+        return binding.root
+    }
+
+    fun updateMemberViewUI(binding: FragmentMemberBinding, viewModel: MemberViewModel){
+        memberViewModel.parliamentMember.observe(this, Observer { member ->
             binding.apply {
                 name.text = memberViewModel?.updateNameText()
                 constituency.text = memberViewModel?.updateConstituencyText()
@@ -51,8 +62,5 @@ class MemberFragment : Fragment() {
                 ifMinister.text = memberViewModel?.updateMemberTitle()
             }
         })
-        return binding.root
     }
-
-
 }
