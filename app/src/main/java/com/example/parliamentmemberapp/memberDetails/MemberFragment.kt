@@ -31,14 +31,7 @@ class MemberFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentMemberBinding>(inflater,
             R.layout.fragment_member, container, false)
 
-//        val application = requireNotNull(this.activity).application
-//
-//        val dataSource = getInstance(application).memberDatabaseDao
-//        val viewModelFactory = MemberViewModelFactory(dataSource, application)
-//
-//      memberViewModel = ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
-        memberViewModel = ViewModelProviders.of(this).get(MemberViewModel::class.java)
-//
+        memberViewModel = ViewModelProvider(this).get(MemberViewModel::class.java)
         binding.memberViewModel = memberViewModel
         binding.lifecycleOwner = this
 
@@ -53,7 +46,7 @@ class MemberFragment : Fragment() {
     }
 
     fun updateMemberViewUI(binding: FragmentMemberBinding, viewModel: MemberViewModel){
-        memberViewModel.parliamentMember.observe(this, Observer { member ->
+        memberViewModel.parliamentMember.observe(viewLifecycleOwner, Observer { member ->
             binding.apply {
                 name.text = memberViewModel?.updateNameText()
                 constituency.text = memberViewModel?.updateConstituencyText()
