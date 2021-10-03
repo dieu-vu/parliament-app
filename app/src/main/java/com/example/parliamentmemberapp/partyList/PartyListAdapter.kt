@@ -28,13 +28,11 @@ class PartyListAdapter: RecyclerView.Adapter<PartyListAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item_party_list, parent, false)
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
         val partyName: TextView = itemView.findViewById(R.id.party_name)
         val partyLogo: ImageView = itemView.findViewById(R.id.party_logo)
     // Encapsulate binding on ViewHolder
@@ -70,7 +68,16 @@ class PartyListAdapter: RecyclerView.Adapter<PartyListAdapter.ViewHolder>() {
                 }
             )
         }
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item_party_list, parent, false)
+                return ViewHolder(view)
+            }
+        }
     }
+
+
 }
 
 
