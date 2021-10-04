@@ -22,7 +22,7 @@ class MemberDataRepository (private val database: MemberDatabase) {
     suspend fun refreshDatabase() {
         withContext(Dispatchers.IO) {
             val memberList = ParliamentApi.retrofitService.getProperties().await()
-            memberList.forEach { it -> dao.insert(it) }
+            memberList.forEach { dao.insert(it) }
         }
     }
 

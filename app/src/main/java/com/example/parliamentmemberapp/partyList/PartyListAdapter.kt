@@ -1,14 +1,12 @@
 package com.example.parliamentmemberapp.partyList
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentmemberapp.R
+import com.example.parliamentmemberapp.databinding.ListItemPartyListBinding
 
 
 class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyListDiffCallback()) {
@@ -24,15 +22,14 @@ class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyLi
     }
 
 
-    class ViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val partyName: TextView = itemView.findViewById(R.id.party_name)
-        private val partyLogo: ImageView = itemView.findViewById(R.id.party_logo)
-    // Encapsulate binding on ViewHolder
+    class ViewHolder private constructor(val binding: ListItemPartyListBinding): RecyclerView.ViewHolder(binding.root) {
+
+        // Encapsulate binding on ViewHolder
         fun bind(
             item: String
         ) {
             val res = itemView.context.resources
-            partyName.text = when (item) {
+            binding.partyName.text = when (item) {
                 "kd" -> "Christian Democrats"
                 "kesk" -> "Centre Party"
                 "kok" -> "National Coalition Party"
@@ -45,7 +42,7 @@ class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyLi
                 else -> ""
             }
 
-            partyLogo.setImageResource(
+            binding.partyLogo.setImageResource(
                 when (item) {
                     "kd" -> R.drawable.kd
                     "kesk" -> R.drawable.kesk
@@ -62,9 +59,9 @@ class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyLi
         }
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_item_party_list, parent, false)
-                return ViewHolder(view)
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemPartyListBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
             }
         }
     }
