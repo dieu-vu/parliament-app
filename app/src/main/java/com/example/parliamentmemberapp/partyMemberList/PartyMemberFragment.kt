@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.parliamentmemberapp.R
+import com.example.parliamentmemberapp.databinding.FragmentPartyMemberBinding
+import com.example.parliamentmemberapp.partyList.PartyListViewModel
 
 
 class PartyMemberFragment : Fragment() {
@@ -16,7 +19,18 @@ class PartyMemberFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_party_member, container, false)
+        val application = requireNotNull(activity).application
+
+
+
+        val partyMemberList = PartyMemberFragmentArgs.fromBundle(this.requireArguments()).party
+
+        val viewModel = ViewModelProvider(this).get(PartyMemberViewModel::class.java)
+
+        val binding = FragmentPartyMemberBinding.inflate(inflater)
+        binding.partyMemberText.text = partyMemberList
+
+        return binding.root
     }
 
 

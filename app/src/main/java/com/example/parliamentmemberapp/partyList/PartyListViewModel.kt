@@ -26,7 +26,7 @@ class PartyListViewModel(application: Application): AndroidViewModel(application
         _navigateToPartyMemberList.value = party
     }
 
-    fun onSleepDataQualityNavigated() {
+    fun displayPartyMemberListCompleted() {
         _navigateToPartyMemberList.value = null
     }
 

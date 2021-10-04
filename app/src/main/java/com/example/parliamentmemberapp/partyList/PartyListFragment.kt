@@ -40,11 +40,11 @@ class PartyListFragment : Fragment() {
         viewModel.navigateToPartyMemberList.observe(viewLifecycleOwner, Observer { party ->
             party?.let {
                 view?.let { it ->
-                    it.findNavController().navigate(
-                        R.id.action_partyListFragment_to_partyMemberFragment
+                    it.findNavController().navigate(PartyListFragmentDirections.
+                    actionPartyListFragmentToPartyMemberFragment(party)
                     )
                 }
-                viewModel.onSleepDataQualityNavigated()
+                viewModel.displayPartyMemberListCompleted()
             }
         })
 

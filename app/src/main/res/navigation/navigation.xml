@@ -34,6 +34,9 @@
         android:name="com.example.parliamentmemberapp.partyMemberList.PartyMemberFragment"
         android:label="fragment_party_member"
         tools:layout="@layout/fragment_party_member" >
+        <argument
+            android:name="party"
+            app:argType="string"/>
         <action
             android:id="@+id/action_partyMemberFragment_to_memberFragment"
             app:destination="@id/memberFragment" />

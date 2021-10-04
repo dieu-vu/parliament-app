@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.parliamentmemberapp.data.MemberDatabase
+import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.repository.MemberDataRepository
 
 class PartyMemberViewModel(application: Application): AndroidViewModel(application) {
@@ -13,5 +14,5 @@ class PartyMemberViewModel(application: Application): AndroidViewModel(applicati
     private val database = MemberDatabase.getInstance(application)
     private val memberRepository = MemberDataRepository(database)
 
-    //val partyMemberList: LiveData<List<MemberDataRepository>> = database.memberDatabaseDao.getPartyMemberList()
+//    val partyMemberList: LiveData<List<MemberOfParliament>> = database.memberDatabaseDao.getPartyMemberList()
 }
