@@ -5,25 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentmemberapp.R
 
 
-class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
+class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyListDiffCallback()) {
 
-
-class PartyListAdapter: RecyclerView.Adapter<PartyListAdapter.ViewHolder>() {
-
-    var data = listOf<String>()
-    set(value) {
-        field = value
-        notifyDataSetChanged() // Tell Recycler not to draw old items
-    }
-
-    override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
@@ -33,8 +25,8 @@ class PartyListAdapter: RecyclerView.Adapter<PartyListAdapter.ViewHolder>() {
 
 
     class ViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val partyName: TextView = itemView.findViewById(R.id.party_name)
-        val partyLogo: ImageView = itemView.findViewById(R.id.party_logo)
+        private val partyName: TextView = itemView.findViewById(R.id.party_name)
+        private val partyLogo: ImageView = itemView.findViewById(R.id.party_logo)
     // Encapsulate binding on ViewHolder
         fun bind(
             item: String
@@ -76,9 +68,18 @@ class PartyListAdapter: RecyclerView.Adapter<PartyListAdapter.ViewHolder>() {
             }
         }
     }
-
-
 }
+
+class PartyListDiffCallback: DiffUtil.ItemCallback<String>() {
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem === newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+}
+
 
 
 
