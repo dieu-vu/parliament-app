@@ -7,6 +7,9 @@
         <variable
             name="party"
             type="String" />
+        <variable
+            name="clickListener"
+            type="com.example.parliamentmemberapp.partyList.PartyListListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +19,8 @@
         android:paddingBottom="16dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:onClick="@{() -> clickListener.onClick(party)}">
 
         <ImageView
             android:id="@+id/party_logo"

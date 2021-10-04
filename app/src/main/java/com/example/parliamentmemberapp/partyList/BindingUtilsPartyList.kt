@@ -7,7 +7,7 @@ import com.example.parliamentmemberapp.R
 
 @BindingAdapter("partyNameFormatted")
 fun TextView.setPartyName(item: String){
-    item?.let{
+    item.let{
         text = when (item) {
             "kd" -> "Christian Democrats"
             "kesk" -> "Centre Party"
@@ -25,7 +25,7 @@ fun TextView.setPartyName(item: String){
 
 @BindingAdapter("partyLogoDisplay")
 fun ImageView.setPartyLogo(item: String){
-    item?.let{
+    item.let{
         setImageResource(
             when (item) {
                 "kd" -> R.drawable.kd

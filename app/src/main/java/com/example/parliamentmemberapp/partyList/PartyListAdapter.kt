@@ -5,16 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.databinding.ListItemPartyListBinding
 
 
-class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyListDiffCallback()) {
+class PartyListAdapter(val clickListener: PartyListListener): ListAdapter<String, PartyListAdapter.ViewHolder>(PartyListDiffCallback()) {
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,8 +24,9 @@ class PartyListAdapter: ListAdapter<String, PartyListAdapter.ViewHolder>(PartyLi
     class ViewHolder private constructor(val binding: ListItemPartyListBinding): RecyclerView.ViewHolder(binding.root) {
 
         // Encapsulate binding on ViewHolder
-        fun bind(item: String) {
+        fun bind(item: String, clickListener: PartyListListener) {
             binding.party = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
         companion object {
@@ -50,5 +50,7 @@ class PartyListDiffCallback: DiffUtil.ItemCallback<String>() {
 }
 
 
-
+class PartyListListener(val clickListener: (party: String) -> Unit){
+    fun onClick(party: String) = clickListener(party)
+}
 
