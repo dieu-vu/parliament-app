@@ -16,7 +16,6 @@ class MemberDataRepository (private val database: MemberDatabase) {
 
     private val dao = database.memberDatabaseDao
 
-    val memberList: LiveData<List<MemberOfParliament>> = dao.getAllMembers()
     val partyList: LiveData<List<String>> = dao.getPartyList()
 
     suspend fun refreshDatabase() {
@@ -31,8 +30,9 @@ class MemberDataRepository (private val database: MemberDatabase) {
         Log.i( "ZZZ","added an entry")
     }
 
-
-
+    fun getPartyMembers(partyName: String): LiveData<List<MemberOfParliament>> {
+        return dao.getPartyMemberList(partyName)
+    }
 
 
 }

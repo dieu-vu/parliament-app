@@ -13,22 +13,24 @@ import com.example.parliamentmemberapp.partyList.PartyListViewModel
 
 class PartyMemberFragment : Fragment() {
 
+    private lateinit var viewModel: PartyMemberViewModel
+    private lateinit var viewModelFactory: PartyMemberViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val binding = FragmentPartyMemberBinding.inflate(inflater)
+
         val application = requireNotNull(activity).application
 
+        val partyName = PartyMemberFragmentArgs.fromBundle(this.requireArguments()).party
 
+        viewModelFactory = PartyMemberViewModelFactory(partyName, application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(PartyMemberViewModel::class.java)
 
-        val partyMemberList = PartyMemberFragmentArgs.fromBundle(this.requireArguments()).party
-
-        val viewModel = ViewModelProvider(this).get(PartyMemberViewModel::class.java)
-
-        val binding = FragmentPartyMemberBinding.inflate(inflater)
-        binding.partyMemberText.text = partyMemberList
+        binding.partyMemberText.text = partyName
 
         return binding.root
     }
