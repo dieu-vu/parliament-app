@@ -9,10 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.parliamentmemberapp.R
-import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
 import com.example.parliamentmemberapp.databinding.FragmentPartyListBinding
-import com.example.parliamentmemberapp.memberDetails.MemberViewModel
 
 
 class PartyListFragment : Fragment() {
@@ -31,15 +32,26 @@ class PartyListFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = PartyListAdapter(PartyListListener {
-            party -> Toast.makeText(context, "${party}", Toast.LENGTH_LONG).show()
+            party -> viewModel.onPartyNameClicked(party)
         })
 
         binding.partyList.adapter = adapter
 
+        viewModel.navigateToPartyMemberList.observe(viewLifecycleOwner, Observer { party ->
+            party?.let {
+                view?.let { it ->
+                    it.findNavController().navigate(
+                        R.id.action_partyListFragment_to_partyMemberFragment
+                    )
+                }
+                viewModel.onSleepDataQualityNavigated()
+            }
+        })
+
         viewModel.partyList.observe(viewLifecycleOwner, Observer {
             it?.let { adapter.submitList(it) }
         })
-        
+
 
         setHasOptionsMenu(true)
         return binding.root

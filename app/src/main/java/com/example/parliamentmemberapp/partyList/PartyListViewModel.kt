@@ -18,7 +18,17 @@ class PartyListViewModel(application: Application): AndroidViewModel(application
 
     val partyList: LiveData<List<String>> = memberRepository.partyList
 
+    private val _navigateToPartyMemberList = MutableLiveData<String>()
+    val navigateToPartyMemberList
+        get() = _navigateToPartyMemberList
 
-
-
+    fun onPartyNameClicked(party: String) {
+        _navigateToPartyMemberList.value = party
     }
+
+    fun onSleepDataQualityNavigated() {
+        _navigateToPartyMemberList.value = null
+    }
+
+
+}

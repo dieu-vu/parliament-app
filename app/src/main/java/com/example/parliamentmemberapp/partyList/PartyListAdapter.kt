@@ -49,7 +49,7 @@ class PartyListDiffCallback: DiffUtil.ItemCallback<String>() {
     }
 }
 
-
+// Pass a callback from the fragment to the view model when party name is clicked
 class PartyListListener(val clickListener: (party: String) -> Unit){
     fun onClick(party: String) = clickListener(party)
 }
