@@ -6,7 +6,7 @@
     <data>
         <variable
             name="party"
-            type="com.example.parliamentmemberapp.repository.MemberDataRepository" />
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +15,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:layout_margin="8dp">
 
         <ImageView
@@ -29,22 +30,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/kesk"
-            tools:srcCompat="@drawable/kesk" />
+            tools:srcCompat="@drawable/kesk"
+            app:partyLogoDisplay="@{party}"/>
 
         <TextView
             android:id="@+id/party_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:text="Center Party"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             android:textSize="18sp"
             android:textAlignment="viewStart"
             app:layout_constraintBottom_toBottomOf="@+id/party_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/party_logo"
             app:layout_constraintTop_toTopOf="@+id/party_logo"
-            tools:text="Party Name" />
+            tools:text="Party Name"
+            app:partyNameFormatted="@{party}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
