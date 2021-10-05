@@ -37,7 +37,7 @@ class PartyMemberFragment : Fragment() {
 
 
         viewModel.partyMemberList.observe(viewLifecycleOwner, {
-            adapter.data = it
+            adapter.submitList(it) //Update the minimal changes in the list
         })
 
 
