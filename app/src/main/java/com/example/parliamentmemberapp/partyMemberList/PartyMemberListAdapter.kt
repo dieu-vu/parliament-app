@@ -3,19 +3,18 @@ package com.example.parliamentmemberapp.partyMemberList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.databinding.ListItemPartyMembersBinding
 
-class PartyMemberListAdapter: ListAdapter<MemberOfParliament, PartyMemberListAdapter.ViewHolder>(PartyMemberListDiffCallBack()){
+class PartyMemberListAdapter (val clickListener: PartyMemberListener): ListAdapter<MemberOfParliament, PartyMemberListAdapter.ViewHolder>(PartyMemberListDiffCallBack()){
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bindMemberListItem(item)
+        holder.bindMemberListItem(item, clickListener)
     }
 
 
@@ -26,8 +25,14 @@ class PartyMemberListAdapter: ListAdapter<MemberOfParliament, PartyMemberListAda
     class ViewHolder private constructor(val binding: ListItemPartyMembersBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bindMemberListItem(
-            item: MemberOfParliament
+            item: MemberOfParliament,
+            clickListener: PartyMemberListener
         ) {
+            binding.member = item //bind member variable to item at the position
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+
+            //Binding text view
             binding.memberName.text = "${item.first} ${item.last}"
             binding.memberTitle.text = if (item.minister) "Minister" else "Parliament Member"
             if (item.minister) {
@@ -46,10 +51,7 @@ class PartyMemberListAdapter: ListAdapter<MemberOfParliament, PartyMemberListAda
                 return ViewHolder(binding)
             }
         }
-
     }
-
-
 }
 
 class PartyMemberListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){
@@ -66,5 +68,8 @@ class PartyMemberListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){
     ): Boolean {
         return (oldItem == newItem)
     }
+}
 
+class PartyMemberListener(val clickListener: (personNumber: Int) -> Unit){
+    fun onClick(member: MemberOfParliament) = clickListener(member.personNumber)
 }

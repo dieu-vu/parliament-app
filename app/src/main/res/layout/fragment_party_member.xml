@@ -7,6 +7,7 @@
         <variable
             name="viewModel"
             type="com.example.parliamentmemberapp.partyMemberList.PartyMemberViewModel" />
+
     </data>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/party_member_list"

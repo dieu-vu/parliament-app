@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.parliamentmemberapp.R
+import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.databinding.FragmentPartyMemberBinding
 import com.example.parliamentmemberapp.partyList.PartyListViewModel
 
@@ -32,7 +34,10 @@ class PartyMemberFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        val adapter = PartyMemberListAdapter()
+        val adapter = PartyMemberListAdapter(PartyMemberListener {
+            personNumber -> Toast.makeText(context, "${personNumber}" , Toast.LENGTH_LONG).show()
+        })
+
         binding.partyMemberList.adapter = adapter
 
 
