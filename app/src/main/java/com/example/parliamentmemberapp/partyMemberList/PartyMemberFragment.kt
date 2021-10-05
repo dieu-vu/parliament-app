@@ -30,7 +30,16 @@ class PartyMemberFragment : Fragment() {
         viewModelFactory = PartyMemberViewModelFactory(partyName, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(PartyMemberViewModel::class.java)
 
-        binding.partyMemberText.text = partyName
+        binding.viewModel = viewModel
+
+        val adapter = PartyMemberListAdapter()
+        binding.partyMemberList.adapter = adapter
+
+
+        viewModel.partyMemberList.observe(viewLifecycleOwner, {
+            adapter.data = it
+        })
+
 
         return binding.root
     }

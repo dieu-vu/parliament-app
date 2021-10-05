@@ -15,9 +15,8 @@ class PartyMemberViewModel(val partyName: String, application: Application): And
     private val database = MemberDatabase.getInstance(application)
     private val memberRepository = MemberDataRepository(database)
 
+    val partyMemberList: LiveData<List<MemberOfParliament>> = memberRepository.getPartyMembers(partyName)
 
-
-   // val partyMemberList: LiveData<List<MemberOfParliament>> = database.memberDatabaseDao.getPartyMembers()
 }
 
 
