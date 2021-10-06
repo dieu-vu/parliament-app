@@ -29,8 +29,10 @@ class PartyMemberFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
+        //partyName is passed from click on PartyList Fragment
         val partyName = PartyMemberFragmentArgs.fromBundle(this.requireArguments()).party
 
+        //Create viewModel with passed PartyName variable
         viewModelFactory = PartyMemberViewModelFactory(partyName, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(PartyMemberViewModel::class.java)
 
@@ -40,8 +42,8 @@ class PartyMemberFragment : Fragment() {
             personNumber -> viewModel.onMemberNameClicked(personNumber)
         })
 
+        // RecyclerView displaying Party's member list
         binding.partyMemberList.adapter = adapter
-
 
         viewModel.partyMemberList.observe(viewLifecycleOwner, {
             adapter.submitList(it) //Update the minimal changes in the list
@@ -50,7 +52,7 @@ class PartyMemberFragment : Fragment() {
         viewModel.navigateToMemberDetails.observe(viewLifecycleOwner, Observer{ member ->
             member?.let{
                 this.findNavController().navigate(
-                    PartyMemberFragmentDirections.actionPartyMemberFragmentToMemberFragment()) //TODO: Add arg (value passed to Member details fragment) here!
+                    PartyMemberFragmentDirections.actionPartyMemberFragmentToMemberFragment(member))
                 viewModel.onMemberDetailsNavigationCompleted()
             }
         })

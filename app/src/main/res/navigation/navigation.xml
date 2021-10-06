@@ -19,7 +19,13 @@
     <fragment
         android:id="@+id/memberFragment"
         android:name="com.example.parliamentmemberapp.memberDetails.MemberFragment"
-        android:label="MemberFragment" />
+        android:label="MemberFragment"
+        >
+        <argument
+            android:name="selectedMember"
+            app:argType="com.example.parliamentmemberapp.data.MemberOfParliament"
+            />
+    </fragment>
     <fragment
         android:id="@+id/partyListFragment"
         android:name="com.example.parliamentmemberapp.partyList.PartyListFragment"

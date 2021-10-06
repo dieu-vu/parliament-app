@@ -71,6 +71,6 @@ class PartyMemberListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){
     }
 }
 
-class PartyMemberListener(val clickListener: (personNumber: Int) -> Unit){
-    fun onClick(member: MemberOfParliament) = clickListener(member.personNumber)
+class PartyMemberListener(val clickListener: (member: MemberOfParliament) -> Unit){
+    fun onClick(member: MemberOfParliament) = clickListener(member)
 }

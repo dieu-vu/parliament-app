@@ -27,26 +27,30 @@ class MemberFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate<FragmentMemberBinding>(inflater,
-            R.layout.fragment_member, container, false)
 
-        memberViewModel = ViewModelProvider(this).get(MemberViewModel::class.java)
-        binding.memberViewModel = memberViewModel
+        val application = requireNotNull(activity).application
+        // Inflate the layout for this fragment
+        binding = FragmentMemberBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        updateMemberViewUI(binding, memberViewModel)
+
+        val member = MemberFragmentArgs.fromBundle(requireArguments()).selectedMember
+        val viewModelFactory = MemberViewModelFactory(member, application)
+        memberViewModel = ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
+        binding.memberViewModel = memberViewModel
+
+        updateMemberViewUI(memberViewModel)
 
         binding.viewOtherMember.setOnClickListener() {
             binding.invalidateAll()
-            memberViewModel.selectNewMember()
-            updateMemberViewUI(binding, memberViewModel)
+            memberViewModel.selectRandomMember()
+            updateMemberViewUI(memberViewModel)
         }
         return binding.root
     }
 
-    fun updateMemberViewUI(binding: FragmentMemberBinding, viewModel: MemberViewModel){
-        memberViewModel.parliamentMember.observe(viewLifecycleOwner, Observer { member ->
+    private fun updateMemberViewUI(viewModel: MemberViewModel){
+        memberViewModel.selectedMember.observe(viewLifecycleOwner, Observer { member ->
             binding.apply {
                 name.text = memberViewModel?.updateNameText()
                 constituency.text = memberViewModel?.updateConstituencyText()

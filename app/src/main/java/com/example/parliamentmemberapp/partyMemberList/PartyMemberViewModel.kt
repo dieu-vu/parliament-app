@@ -14,18 +14,19 @@ class PartyMemberViewModel(val partyName: String, application: Application): And
 
     val partyMemberList: LiveData<List<MemberOfParliament>> = memberRepository.getPartyMembers(partyName)
 
-    private val _navigateToMemberDetails = MutableLiveData<Int>()
+    private val _navigateToMemberDetails = MutableLiveData<MemberOfParliament>()
     val navigateToMemberDetails
         get() = _navigateToMemberDetails
 
-    fun onMemberNameClicked(personNumber: Int){
-        _navigateToMemberDetails.value = personNumber
+    fun onMemberNameClicked(member: MemberOfParliament){
+        _navigateToMemberDetails.value = member
     }
 
     //Set the live data to Null when the navigation is done
     fun onMemberDetailsNavigationCompleted(){
         _navigateToMemberDetails.value = null
     }
+
 }
 
 
