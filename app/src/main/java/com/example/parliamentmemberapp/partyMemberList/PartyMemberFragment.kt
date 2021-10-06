@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.databinding.FragmentPartyMemberBinding
@@ -35,7 +37,7 @@ class PartyMemberFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = PartyMemberListAdapter(PartyMemberListener {
-            personNumber -> Toast.makeText(context, "${personNumber}" , Toast.LENGTH_LONG).show()
+            personNumber -> viewModel.onMemberNameClicked(personNumber)
         })
 
         binding.partyMemberList.adapter = adapter
@@ -45,6 +47,13 @@ class PartyMemberFragment : Fragment() {
             adapter.submitList(it) //Update the minimal changes in the list
         })
 
+        viewModel.navigateToMemberDetails.observe(viewLifecycleOwner, Observer{ member ->
+            member?.let{
+                this.findNavController().navigate(
+                    PartyMemberFragmentDirections.actionPartyMemberFragmentToMemberFragment()) //TODO: Add arg (value passed to Member details fragment) here!
+                viewModel.onMemberDetailsNavigationCompleted()
+            }
+        })
 
         return binding.root
     }

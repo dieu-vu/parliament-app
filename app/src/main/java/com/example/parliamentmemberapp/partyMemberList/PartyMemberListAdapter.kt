@@ -54,6 +54,7 @@ class PartyMemberListAdapter (val clickListener: PartyMemberListener): ListAdapt
     }
 }
 
+//Update List item with the changes only
 class PartyMemberListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){
     override fun areItemsTheSame(
         oldItem: MemberOfParliament,

@@ -1,10 +1,7 @@
 package com.example.parliamentmemberapp.partyMemberList
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.example.parliamentmemberapp.data.MemberDatabase
 import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.repository.MemberDataRepository
@@ -17,6 +14,18 @@ class PartyMemberViewModel(val partyName: String, application: Application): And
 
     val partyMemberList: LiveData<List<MemberOfParliament>> = memberRepository.getPartyMembers(partyName)
 
+    private val _navigateToMemberDetails = MutableLiveData<Int>()
+    val navigateToMemberDetails
+        get() = _navigateToMemberDetails
+
+    fun onMemberNameClicked(personNumber: Int){
+        _navigateToMemberDetails.value = personNumber
+    }
+
+    //Set the live data to Null when the navigation is done
+    fun onMemberDetailsNavigationCompleted(){
+        _navigateToMemberDetails.value = null
+    }
 }
 
 
