@@ -19,12 +19,11 @@ interface MemberDatabaseDao {
     @Query("SELECT DISTINCT party FROM MemberOfParliament ORDER BY party")
     fun getPartyList(): LiveData<List<String>>
 
-    @Query("SELECT * FROM MemberOfParliament WHERE party= :partyName")
+    @Query("SELECT * FROM MemberOfParliament WHERE party= :partyName ORDER BY first")
     fun getPartyMemberList(partyName: String): LiveData<List<MemberOfParliament>>
 
-    @Query("SELECT * FROM MemberOfParliament ORDER BY RANDOM() LIMIT 1")
-    fun getRandomMember(): LiveData<MemberOfParliament>
-
+    @Query("SELECT * FROM MemberOfParliament WHERE party= :partyName AND first > :previousName ORDER BY first LIMIT 1")
+    fun getNextMember(partyName: String, previousName: String): LiveData<MemberOfParliament>
 
     @Query("DELETE FROM MemberOfParliament")
     suspend fun clearData()

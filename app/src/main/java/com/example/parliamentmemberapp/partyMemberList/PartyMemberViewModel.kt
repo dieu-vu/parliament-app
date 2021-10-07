@@ -30,7 +30,6 @@ class PartyMemberViewModel(val partyName: String, application: Application): And
 }
 
 
-
 class PartyMemberViewModelFactory(
     private val partyName: String,
     private val application: Application

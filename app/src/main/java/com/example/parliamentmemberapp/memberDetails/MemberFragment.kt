@@ -1,6 +1,7 @@
 package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.data.MemberDatabase
 import com.example.parliamentmemberapp.data.MemberDatabase.Companion.getInstance
@@ -41,11 +43,25 @@ class MemberFragment : Fragment() {
 
         updateMemberViewUI(memberViewModel)
 
+
         binding.viewOtherMember.setOnClickListener() {
-            binding.invalidateAll()
-            memberViewModel.selectRandomMember()
+            Log.i("ZZZ", "Clicked button")
+            memberViewModel.getNextMemberData()
+            Log.i("ZZZ", "sau khi click  ${member.toString()}")
             updateMemberViewUI(memberViewModel)
+
         }
+        //For test NextMemberFragment
+//        val previousMember: previousMemberData = previousMemberData(member.party, member.first)
+//
+//        memberViewModel.navigateToNextMember.observe(viewLifecycleOwner, Observer {
+//            nextMember ->
+//            nextMember?.let{
+//                this.findNavController().navigate(MemberFragmentDirections.actionMemberFragmentToNextMemberFragment(
+//                    previousMember))
+//                memberViewModel.navigateToNextMemberCompleted()
+//            }
+//        })
         return binding.root
     }
 

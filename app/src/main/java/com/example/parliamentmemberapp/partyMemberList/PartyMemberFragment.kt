@@ -39,7 +39,7 @@ class PartyMemberFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = PartyMemberListAdapter(PartyMemberListener {
-            personNumber -> viewModel.onMemberNameClicked(personNumber)
+            member -> viewModel.onMemberNameClicked(member)
         })
 
         // RecyclerView displaying Party's member list

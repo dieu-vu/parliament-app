@@ -28,7 +28,6 @@
                android:layout_height="wrap_content"
                style="@style/member_info_text"
                android:textColor="@color/teal_700"
-               android:text="@{memberViewModel.displayMemberTitle}"
                />
 
            <TextView

@@ -1,68 +1,56 @@
 package com.example.parliamentmemberapp.memberDetails
 
 import android.app.Application
+import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.room.PrimaryKey
 import com.example.parliamentmemberapp.data.*
 import com.example.parliamentmemberapp.partyMemberList.PartyMemberViewModel
 import com.example.parliamentmemberapp.repository.MemberDataRepository
+import kotlinx.android.parcel.Parcelize
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
-class MemberViewModel (member: MemberOfParliament, application: Application): AndroidViewModel(application){
+class MemberViewModel (member: MemberOfParliament, application: Application):
+    AndroidViewModel(application),
+    MemberViewFormatting {
 
     private val database = MemberDatabase.getInstance(application)
-
-
-    private val _selectedMember = MutableLiveData<MemberOfParliament>()
-    val selectedMember: LiveData<MemberOfParliament>
+    private var _selectedMember = MutableLiveData<MemberOfParliament>()
+    override val selectedMember: LiveData<MemberOfParliament>
         get() = _selectedMember
+
 
     init{
         Log.i("ZZZ", "MemberViewModel created!")
-
-        if (_selectedMember == null){
-            selectRandomMember()
-        }
         _selectedMember.value = member
     }
 
-    val displayMemberTitle = Transformations.map(selectedMember){
-        when(it.minister) {
-            true -> "Minister"
-            false -> "Parliament Member"
-        }
+    private val _navigateToNextMember = MutableLiveData<ArrayList<String>>()
+    val navigateToNextMember
+        get() = _navigateToNextMember
+
+
+    fun getNextMemberData(){
+        val nextMember = database.memberDatabaseDao.getNextMember(selectedMember?.value?.party.toString(),selectedMember?.value?.first.toString())
+        Log.i("ZZZ", "next Member in getNextMemberData func : ${nextMember.toString()}")
+        _selectedMember.postValue(nextMember.value)
+        Log.i("ZZZ", "cai nay chac la luon null ${_selectedMember.value}")
+        Log.i("ZZZ", "selected member after update to next member : ${_selectedMember.toString()}")
     }
 
-    fun selectRandomMember (){
-        _selectedMember.value = database.memberDatabaseDao.getRandomMember().value
+
+    //For next member fragment test, but remove later
+    fun onNextBtnClicked(member: MemberOfParliament) {
+        _navigateToNextMember.value = arrayListOf(member.party, member.first)
     }
 
-
-    fun updateNameText(): String {
-        return """${(_selectedMember.value?.first) ?: "not found"} ${(_selectedMember.value?.last) ?: "not found"}"""
-    }
-
-    fun updateConstituencyText(): String{
-        return "Constituency: \n ${(_selectedMember.value?.constituency)?: "not found"}"
-    }
-
-    fun updateAgeText(): String{
-        val age: Int = (Calendar.getInstance().get(Calendar.YEAR) -
-                (_selectedMember.value?.bornYear ?: 0))
-        return if (age < Calendar.getInstance().get(Calendar.YEAR)) "Age: \n $age" else "Age: \n not found"
-    }
-
-    fun updatePartyText(): String{
-        return "Party: \n ${(_selectedMember.value?.party)?: "not found"}"
-    }
-
-    //Display title if Minister or Member
-    fun updateMemberTitle(): String{
-        return if((_selectedMember.value?.minister) == false) "Member of Parliament" else "Minister"
-
+    fun navigateToNextMemberCompleted() {
+        _navigateToNextMember.value = null
     }
 
 
@@ -82,3 +70,9 @@ class MemberViewModelFactory(
     }
 
 }
+
+@Parcelize
+data class previousMemberData (
+    val partyName: String,
+    val previousName: String
+): Parcelable
