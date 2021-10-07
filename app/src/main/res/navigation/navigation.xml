@@ -22,9 +22,6 @@
             android:name="selectedMember"
             app:argType="com.example.parliamentmemberapp.data.MemberOfParliament"
             />
-        <action
-            android:id="@+id/action_memberFragment_to_nextMemberFragment"
-            app:destination="@id/nextMemberFragment" />
     </fragment>
     <fragment
         android:id="@+id/partyListFragment"
@@ -47,14 +44,4 @@
             android:id="@+id/action_partyMemberFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/nextMemberFragment"
-        android:name="com.example.parliamentmemberapp.memberDetails.NextMemberFragment"
-        android:label="fragment_next_member"
-        tools:layout="@layout/fragment_next_member" >
-        <argument
-            android:name="previousMember"
-            app:argType="com.example.parliamentmemberapp.memberDetails.previousMemberData" />
-    </fragment>
-    <action android:id="@+id/action_global_memberFragment" app:destination="@id/memberFragment"/>
 </navigation>

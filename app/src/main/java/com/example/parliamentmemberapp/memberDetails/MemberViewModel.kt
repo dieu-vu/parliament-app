@@ -9,6 +9,7 @@ import com.example.parliamentmemberapp.data.*
 import com.example.parliamentmemberapp.partyMemberList.PartyMemberViewModel
 import com.example.parliamentmemberapp.repository.MemberDataRepository
 import kotlinx.android.parcel.Parcelize
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,30 +31,21 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
         _selectedMember.value = member
     }
 
-    private val _navigateToNextMember = MutableLiveData<ArrayList<String>>()
-    val navigateToNextMember
-        get() = _navigateToNextMember
-
 
     fun getNextMemberData(){
-        val nextMember = database.memberDatabaseDao.getNextMember(selectedMember?.value?.party.toString(),selectedMember?.value?.first.toString())
-        Log.i("ZZZ", "next Member in getNextMemberData func : ${nextMember.toString()}")
-        _selectedMember.postValue(nextMember.value)
-        Log.i("ZZZ", "cai nay chac la luon null ${_selectedMember.value}")
-        Log.i("ZZZ", "selected member after update to next member : ${_selectedMember.toString()}")
+        viewModelScope.launch {
+            val nextMember = database.memberDatabaseDao.getNextMember(
+                selectedMember?.value?.party.toString(),
+                selectedMember?.value?.first.toString()
+            )
+            if (nextMember != null) {
+                _selectedMember.value = nextMember
+            } else {
+                _selectedMember.value = database.memberDatabaseDao.getFirstMember(
+                    selectedMember?.value?.party.toString())
+            }
+        }
     }
-
-
-    //For next member fragment test, but remove later
-    fun onNextBtnClicked(member: MemberOfParliament) {
-        _navigateToNextMember.value = arrayListOf(member.party, member.first)
-    }
-
-    fun navigateToNextMemberCompleted() {
-        _navigateToNextMember.value = null
-    }
-
-
 }
 
 class MemberViewModelFactory(
@@ -71,8 +63,3 @@ class MemberViewModelFactory(
 
 }
 
-@Parcelize
-data class previousMemberData (
-    val partyName: String,
-    val previousName: String
-): Parcelable

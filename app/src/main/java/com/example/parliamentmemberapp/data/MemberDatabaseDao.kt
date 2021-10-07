@@ -23,7 +23,10 @@ interface MemberDatabaseDao {
     fun getPartyMemberList(partyName: String): LiveData<List<MemberOfParliament>>
 
     @Query("SELECT * FROM MemberOfParliament WHERE party= :partyName AND first > :previousName ORDER BY first LIMIT 1")
-    fun getNextMember(partyName: String, previousName: String): LiveData<MemberOfParliament>
+    suspend fun getNextMember(partyName: String, previousName: String): MemberOfParliament
+
+    @Query("SELECT * FROM MemberOfParliament WHERE party= :partyName ORDER BY first LIMIT 1")
+    suspend fun getFirstMember(partyName: String): MemberOfParliament
 
     @Query("DELETE FROM MemberOfParliament")
     suspend fun clearData()

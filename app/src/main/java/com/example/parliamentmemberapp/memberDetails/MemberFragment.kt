@@ -31,7 +31,6 @@ class MemberFragment : Fragment() {
     ): View? {
 
         val application = requireNotNull(activity).application
-        // Inflate the layout for this fragment
         binding = FragmentMemberBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
@@ -43,25 +42,12 @@ class MemberFragment : Fragment() {
 
         updateMemberViewUI(memberViewModel)
 
-
         binding.viewOtherMember.setOnClickListener() {
             Log.i("ZZZ", "Clicked button")
             memberViewModel.getNextMemberData()
-            Log.i("ZZZ", "sau khi click  ${member.toString()}")
             updateMemberViewUI(memberViewModel)
-
         }
-        //For test NextMemberFragment
-//        val previousMember: previousMemberData = previousMemberData(member.party, member.first)
-//
-//        memberViewModel.navigateToNextMember.observe(viewLifecycleOwner, Observer {
-//            nextMember ->
-//            nextMember?.let{
-//                this.findNavController().navigate(MemberFragmentDirections.actionMemberFragmentToNextMemberFragment(
-//                    previousMember))
-//                memberViewModel.navigateToNextMemberCompleted()
-//            }
-//        })
+
         return binding.root
     }
 

@@ -7,7 +7,7 @@
     <string name="constituency">Constituency</string>
     <string name="age">Age</string>
     <string name="party">Party</string>
-    <string name="view_other_member">View another member</string>
+    <string name="view_next_member">View next member</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="upVote_bth">Upvote</string>
