@@ -50,12 +50,15 @@
                 style="@style/member_info_text"
                 />
 
-           <Button
-               android:id="@+id/view_other_member"
-               android:layout_width="wrap_content"
+           <ImageView
+               android:id="@+id/member_image"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="@string/view_next_member"
-               android:layout_marginTop="16dp"/>
+               android:contentDescription="@string/member_image"
+               android:paddingTop="16dp"
+               android:src="@drawable/ic_launcher_foreground"
+               app:imageUrl="@{memberViewModel.imageSrcUrl}"
+               />
 
            <LinearLayout
                android:layout_width="match_parent"
@@ -75,7 +78,15 @@
                    android:contentDescription="@string/downVote_btn"
                    app:srcCompat="@drawable/ic_thumbsdown"
                    style="@style/vote_btn"/>
-            </LinearLayout>
+
+           </LinearLayout>
+
+           <Button
+               android:id="@+id/view_other_member"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:text="@string/view_next_member" />
        </LinearLayout>
     </ScrollView>
 </layout>

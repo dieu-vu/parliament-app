@@ -61,5 +61,6 @@ class MemberFragment : Fragment() {
                 ifMinister.text = memberViewModel?.updateMemberTitle()
             }
         })
+
     }
 }

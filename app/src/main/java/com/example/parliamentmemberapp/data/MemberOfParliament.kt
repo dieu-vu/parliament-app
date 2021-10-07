@@ -16,6 +16,7 @@ data class MemberOfParliament (
     val first: String,
     val party: String,
     val minister: Boolean,
+    @Json(name = "picture")
     val picture: String,
     val twitter: String,
     val bornYear: Int,

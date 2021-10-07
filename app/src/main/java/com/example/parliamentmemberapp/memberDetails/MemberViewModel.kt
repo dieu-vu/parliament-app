@@ -31,6 +31,7 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
         _selectedMember.value = member
     }
 
+    val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) { member -> "https://avoindata.eduskunta.fi/${member.picture}"}
 
     fun getNextMemberData(){
         viewModelScope.launch {
