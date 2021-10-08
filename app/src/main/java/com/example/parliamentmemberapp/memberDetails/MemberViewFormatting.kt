@@ -1,11 +1,10 @@
 package com.example.parliamentmemberapp.memberDetails
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.parliamentmemberapp.data.MemberFeedback
 import com.example.parliamentmemberapp.data.MemberOfParliament
 import java.util.*
+
 interface MemberViewFormatting {
 
     val selectedMember: LiveData<MemberOfParliament>
@@ -48,7 +47,7 @@ interface MemberViewFormatting {
 
     //Display title if Minister or Member
     fun updateMemberTitle(): String{
-        return if((selectedMember.value?.minister) == false) "Member of Parliament" else "Minister"
+        return if(selectedMember?.value?.minister == true) "Minister" else "Member of Parliament"
     }
 
     fun ratingScoreText(): String{

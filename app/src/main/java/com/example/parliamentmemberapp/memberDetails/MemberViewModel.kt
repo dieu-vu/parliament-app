@@ -21,14 +21,6 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
     override val selectedMember: LiveData<MemberOfParliament>
         get() = _selectedMember
 
-    private var _ratingScore = MutableLiveData<Int>()
-    val ratingScore: LiveData<Int>
-        get() = _ratingScore
-
-    private var _comments = MutableLiveData<List<String>>()
-    val comments: LiveData<List<String>>
-        get() = _comments
-
 
     init{
         Log.i("ZZZ", "MemberViewModel created!")
@@ -38,11 +30,8 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
     val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) { member -> "https://avoindata.eduskunta.fi/${member.picture}"}
 
     override val memberFeedback = _selectedMember?.value?.let {
-        feedbackRepository.getMemberFeedback(
-            it.personNumber)
-    }
-
-
+            feedbackRepository.getMemberFeedback(
+                it.personNumber)}
 
     fun getNextMemberData(){
         viewModelScope.launch {
@@ -58,7 +47,22 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
             }
         }
     }
+
+    fun updateFeedback(ratingChange: Int){
+        viewModelScope.launch {
+            val newMemberFeedback = MemberFeedback(
+                memberFeedback?.value?.personNumber ?:0,
+                memberFeedback?.value?.rating?.plus(ratingChange) ?:0,
+                "${memberFeedback?.value?.comment}"
+                )
+            if (newMemberFeedback != null) {
+                feedbackRepository.insertFeedback(newMemberFeedback)
+            }
+        }
+    }
 }
+
+
 
 class MemberViewModelFactory(
     private val member: MemberOfParliament,

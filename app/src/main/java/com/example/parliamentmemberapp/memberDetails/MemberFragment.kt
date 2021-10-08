@@ -49,9 +49,13 @@ class MemberFragment : Fragment() {
         }
 
         binding.upVoteBtn.setOnClickListener() {
-            memberViewModel.selectedMember.observe(viewLifecycleOwner, Observer {
-                binding.ratingScore
-            })
+            memberViewModel.updateFeedback(1 )
+            updateMemberViewUI(memberViewModel)
+        }
+
+        binding.downVoteBtn.setOnClickListener() {
+            memberViewModel.updateFeedback(-1 )
+            updateMemberViewUI(memberViewModel)
         }
 
 
