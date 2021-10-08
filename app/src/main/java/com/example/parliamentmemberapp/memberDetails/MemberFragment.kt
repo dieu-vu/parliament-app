@@ -6,17 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
-import com.example.parliamentmemberapp.R
-import com.example.parliamentmemberapp.data.MemberDatabase
-import com.example.parliamentmemberapp.data.MemberDatabase.Companion.getInstance
-import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
-import kotlinx.coroutines.InternalCoroutinesApi
 
 //TODO: Add Up button and Menu
 
@@ -28,7 +20,7 @@ class MemberFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val application = requireNotNull(activity).application
         binding = FragmentMemberBinding.inflate(inflater)
@@ -52,7 +44,7 @@ class MemberFragment : Fragment() {
     }
 
     private fun updateMemberViewUI(viewModel: MemberViewModel){
-        memberViewModel.selectedMember.observe(viewLifecycleOwner, Observer { member ->
+        memberViewModel.selectedMember.observe(viewLifecycleOwner, Observer { it ->
             binding.apply {
                 name.text = memberViewModel?.updateNameText()
                 constituency.text = memberViewModel?.updateConstituencyText()

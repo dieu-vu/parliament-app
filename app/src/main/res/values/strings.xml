@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Parliament Member App</string>
-    <string name="view_info_text">Click to view member information</string>
-    <string name="view_info_btn">View Member Info</string>
+    <string name="welcome_text">Welcome to the Parliament Repository</string>
+    <string name="search_btn">Search Member</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="constituency">Constituency</string>
     <string name="age">Age</string>
     <string name="party">Party</string>
     <string name="view_next_member">View next member</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="upVote_bth">Upvote</string>
     <string name="downVote_btn">Downvote</string>

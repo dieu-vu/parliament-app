@@ -32,12 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/view_info_text"
+            android:text="@string/welcome_text"
             />
 
         <Button
             android:id="@+id/view_info_button"
-            android:text="@string/view_info_btn"
+            android:text="@string/search_btn"
             style="@style/view_buttons" />
 
         <Button
