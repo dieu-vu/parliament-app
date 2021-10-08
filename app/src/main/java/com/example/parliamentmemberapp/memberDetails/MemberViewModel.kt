@@ -31,9 +31,7 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
         _selectedMember.value = member
         viewModelScope.launch {
                 _memberFeedback.value = _selectedMember.value?.personNumber?.let {
-                    feedbackRepository.getMemberFeedback(
-                        it
-                    )
+                    feedbackRepository.getMemberFeedback(it)
                 }
             }
     }
@@ -72,6 +70,20 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
                 _memberFeedback.value = newMemberFeedback
             }
         }
+    }
+
+
+//Navigating to comment fragment, passing personNumber
+    private val _navigateToComment = MutableLiveData<MemberFeedback>()
+    val navigateToComment: LiveData<MemberFeedback>
+        get() = _navigateToComment
+
+    fun onCommentBtnClicked(memberFeedback: MemberFeedback) {
+        _navigateToComment.value = memberFeedback
+    }
+
+    fun navigateToCommentCompleted() {
+        _navigateToComment.value = null
     }
 }
 

@@ -22,6 +22,9 @@
             android:name="selectedMember"
             app:argType="com.example.parliamentmemberapp.data.MemberOfParliament"
             />
+        <action
+            android:id="@+id/action_memberFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
     <fragment
         android:id="@+id/partyListFragment"
@@ -43,5 +46,17 @@
         <action
             android:id="@+id/action_partyMemberFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.example.parliamentmemberapp.memberDetails.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" >
+        <action
+            android:id="@+id/action_commentFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+        <argument
+            android:name="memberFeedback"
+            app:argType="com.example.parliamentmemberapp.data.MemberFeedback" />
     </fragment>
 </navigation>

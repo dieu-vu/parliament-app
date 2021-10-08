@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.parliamentmemberapp.data.MemberFeedback
 import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
 import kotlinx.android.synthetic.main.fragment_member.*
 
@@ -58,6 +60,21 @@ class MemberFragment : Fragment() {
             updateMemberViewUI(memberViewModel)
         }
 
+
+        var observedMemberFeedback = MemberFeedback(member.personNumber,0,"")
+        memberViewModel.memberFeedback.observe(viewLifecycleOwner, Observer { observedMemberFeedback = it })
+
+        binding.addComment.setOnClickListener(){
+            memberViewModel.onCommentBtnClicked(observedMemberFeedback)
+        }
+
+        memberViewModel.navigateToComment.observe(viewLifecycleOwner, Observer {
+            nextMember ->
+            nextMember?.let{
+                this.findNavController().navigate(MemberFragmentDirections.actionMemberFragmentToCommentFragment(observedMemberFeedback))
+                memberViewModel.navigateToCommentCompleted()
+            }
+        })
 
         return binding.root
     }

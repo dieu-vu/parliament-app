@@ -26,7 +26,7 @@ class TitleViewModel(application: Application): AndroidViewModel(application) {
         coroutineScope.launch {
             memberRepository.refreshDatabase()
 
-//Run only once when generating first time Member feedback database
+//Run the following lines only once when generating Member feedback database for the first time
 //            memberFeedbackDatabase = MemberFeedbackDatabase.getInstance(application)
 //            MemberFeedbackRepository(memberFeedbackDatabase).refreshFeedbackDatabase()
 
