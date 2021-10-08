@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
+import kotlinx.android.synthetic.main.fragment_member.*
 
 //TODO: Add Up button and Menu
 
@@ -66,6 +67,9 @@ class MemberFragment : Fragment() {
                 party.text = memberViewModel?.updatePartyText()
                 ifMinister.text = memberViewModel?.updateMemberTitle()
             }
+        })
+        memberViewModel.memberFeedback?.observe(viewLifecycleOwner, Observer {
+            binding.ratingScore.text = memberViewModel?.ratingScoreText()
         })
 
     }

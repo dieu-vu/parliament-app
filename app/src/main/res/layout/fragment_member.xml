@@ -92,6 +92,15 @@
                android:text="Rating score: " />
 
            <Button
+               android:id="@+id/add_comment"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/add_comment_btn"
+               android:layout_marginBottom="16dp"
+               android:layout_marginTop="16dp"
+               />
+
+           <Button
                android:id="@+id/view_other_member"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"

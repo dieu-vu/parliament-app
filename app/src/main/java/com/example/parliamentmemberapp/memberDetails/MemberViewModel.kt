@@ -37,6 +37,11 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
 
     val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) { member -> "https://avoindata.eduskunta.fi/${member.picture}"}
 
+    override val memberFeedback = _selectedMember?.value?.let {
+        feedbackRepository.getMemberFeedback(
+            it.personNumber)
+    }
+
 
 
     fun getNextMemberData(){
