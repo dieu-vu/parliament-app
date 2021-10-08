@@ -22,16 +22,24 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
         get() = _selectedMember
 
 
+    private var _memberFeedback = MutableLiveData<MemberFeedback>()
+    override val memberFeedback: LiveData<MemberFeedback>
+        get() = _memberFeedback
+
     init{
         Log.i("ZZZ", "MemberViewModel created!")
         _selectedMember.value = member
+        viewModelScope.launch {
+                _memberFeedback.value = _selectedMember.value?.personNumber?.let {
+                    feedbackRepository.getMemberFeedback(
+                        it
+                    )
+                }
+            }
     }
 
     val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) { member -> "https://avoindata.eduskunta.fi/${member.picture}"}
 
-    override val memberFeedback = _selectedMember?.value?.let {
-            feedbackRepository.getMemberFeedback(
-                it.personNumber)}
 
     fun getNextMemberData(){
         viewModelScope.launch {
@@ -41,22 +49,27 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
             )
             if (nextMember != null) {
                 _selectedMember.value = nextMember
+
             } else {
                 _selectedMember.value = database.memberDatabaseDao.getFirstMember(
                     selectedMember?.value?.party.toString())
             }
+            _memberFeedback.value = _selectedMember?.value?.let {
+                feedbackRepository.getMemberFeedback(
+                    it.personNumber)}
         }
     }
 
     fun updateFeedback(ratingChange: Int){
         viewModelScope.launch {
             val newMemberFeedback = MemberFeedback(
-                memberFeedback?.value?.personNumber ?:0,
-                memberFeedback?.value?.rating?.plus(ratingChange) ?:0,
-                "${memberFeedback?.value?.comment}"
+                _memberFeedback?.value?.personNumber ?:0,
+                _memberFeedback?.value?.rating?.plus(ratingChange) ?:0,
+                "${_memberFeedback?.value?.comment}"
                 )
             if (newMemberFeedback != null) {
                 feedbackRepository.insertFeedback(newMemberFeedback)
+                _memberFeedback.value = newMemberFeedback
             }
         }
     }

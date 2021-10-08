@@ -38,26 +38,21 @@ class MemberDataRepository (private val database: MemberDatabase) {
 class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
     private val feedbackDao = feedbackDB.memberFeedbackDao
 
-    suspend fun generateFeedbackDatabase(){
+    suspend fun refreshFeedbackDatabase(){
         withContext(Dispatchers.IO){
             val memberList = ParliamentApi.retrofitService.getProperties().await()
             memberList.forEach { feedbackDao.update(MemberFeedback(it.personNumber, 0,"")) }
         }
     }
 
+
     suspend fun insertFeedback(member: MemberFeedback){
         feedbackDao.insert(member)
     }
 
-    fun getMemberFeedback(personNumber: Int): LiveData<MemberFeedback>{
+    suspend fun getMemberFeedback(personNumber: Int): MemberFeedback{
         return feedbackDao.getMemberFeedback(personNumber)
     }
 
-//    fun getMemberRating(personNumber: Int): LiveData<Int>{
-//        return feedbackDao.getMemberRating(personNumber)
-//    }
-//
-//    fun getMemberComment(personNumber: Int): LiveData<List<String>>{
-//        return feedbackDao.getMemberComment(personNumber)
-//    }
+
 }
