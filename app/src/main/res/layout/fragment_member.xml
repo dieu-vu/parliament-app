@@ -66,6 +66,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
+               android:layout_weight="0.1"
                android:paddingTop="8dp"
                android:paddingBottom="8dp">
 
@@ -74,6 +75,7 @@
                    android:contentDescription="@string/upVote_bth"
                    app:srcCompat="@drawable/ic_thumbsup"
                    style="@style/vote_btn"/>
+
                <ImageButton
                    android:id="@+id/downVote_btn"
                    android:contentDescription="@string/downVote_btn"
@@ -81,6 +83,13 @@
                    style="@style/vote_btn"/>
 
            </LinearLayout>
+
+           <TextView
+               android:id="@+id/rating_score"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               style="@style/member_info_text"
+               android:text="Rating score: " />
 
            <Button
                android:id="@+id/view_other_member"

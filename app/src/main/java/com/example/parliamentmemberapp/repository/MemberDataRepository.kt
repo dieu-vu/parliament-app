@@ -1,13 +1,12 @@
 package com.example.parliamentmemberapp.repository
 
+import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.parliamentmemberapp.MyApp
-import com.example.parliamentmemberapp.data.MemberDatabase
-import com.example.parliamentmemberapp.data.MemberOfParliament
-import com.example.parliamentmemberapp.data.ParliamentApi
+import com.example.parliamentmemberapp.data.*
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -34,5 +33,23 @@ class MemberDataRepository (private val database: MemberDatabase) {
         return dao.getPartyMemberList(partyName)
     }
 
+}
 
+class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
+    private val feedbackDao = feedbackDB.memberFeedbackDao
+
+    suspend fun generateFeedbackDatabase(){
+        withContext(Dispatchers.IO){
+            val memberList = ParliamentApi.retrofitService.getProperties().await()
+            memberList.forEach { feedbackDao.insert(MemberFeedback(it.personNumber, 0, "")) }
+        }
+    }
+
+    suspend fun insertFeedback(member: MemberFeedback){
+        feedbackDao.insert(member)
+    }
+
+    fun getMemberFeedback(personNumber: Int): LiveData<MemberFeedback>{
+        return feedbackDao.getMemberFeedback(personNumber)
+    }
 }

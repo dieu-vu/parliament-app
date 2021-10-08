@@ -1,3 +1,7 @@
+//NAME: DIEU VU
+//DATE CREATED: 18-9-2021
+
+
 package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle
@@ -22,7 +26,9 @@ class MemberFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+
         val application = requireNotNull(activity).application
+
         binding = FragmentMemberBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
@@ -32,6 +38,7 @@ class MemberFragment : Fragment() {
         memberViewModel = ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
         binding.memberViewModel = memberViewModel
 
+
         updateMemberViewUI(memberViewModel)
 
         binding.viewOtherMember.setOnClickListener() {
@@ -39,6 +46,13 @@ class MemberFragment : Fragment() {
             memberViewModel.getNextMemberData()
             updateMemberViewUI(memberViewModel)
         }
+
+        binding.upVoteBtn.setOnClickListener() {
+            memberViewModel.selectedMember.observe(viewLifecycleOwner, Observer {
+                binding.ratingScore
+            })
+        }
+
 
         return binding.root
     }

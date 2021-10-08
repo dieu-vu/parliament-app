@@ -2,12 +2,14 @@ package com.example.parliamentmemberapp.data
 
 import android.content.Context
 import android.util.Log
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+@Database(entities = [MemberFeedback::class], version =1, exportSchema = false)
 abstract class MemberFeedbackDatabase: RoomDatabase() {
 
-    abstract val memberDatabaseDao: MemberDatabaseDao
+    abstract val memberFeedbackDao: MemberFeedbackDao
 
     companion object{
         @Volatile //changes made to variable INSTANCE are visible to other threads immediately
