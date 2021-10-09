@@ -45,6 +45,7 @@ class CommentFragment : Fragment() {
             val newComment = binding.editComment.text.toString()
             viewModel.updateFeedback(newComment)
             updateCommentListUI(adapter)
+            binding.editComment.setText("")
 
         }
 
