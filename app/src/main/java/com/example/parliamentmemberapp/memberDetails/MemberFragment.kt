@@ -10,12 +10,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.parliamentmemberapp.data.MemberFeedback
 import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
-import kotlinx.android.synthetic.main.fragment_member.*
 
 //TODO: Add Up button and Menu
 
@@ -42,33 +40,33 @@ class MemberFragment : Fragment() {
         binding.memberViewModel = memberViewModel
 
 
-        updateMemberViewUI(memberViewModel)
+        updateMemberViewUI()
 
-        binding.viewOtherMember.setOnClickListener() {
+        binding.viewOtherMember.setOnClickListener {
             Log.i("ZZZ", "Clicked button")
             memberViewModel.getNextMemberData()
-            updateMemberViewUI(memberViewModel)
+            updateMemberViewUI()
         }
 
-        binding.upVoteBtn.setOnClickListener() {
+        binding.upVoteBtn.setOnClickListener {
             memberViewModel.updateFeedback(1 )
-            updateMemberViewUI(memberViewModel)
+            updateMemberViewUI()
         }
 
-        binding.downVoteBtn.setOnClickListener() {
+        binding.downVoteBtn.setOnClickListener {
             memberViewModel.updateFeedback(-1 )
-            updateMemberViewUI(memberViewModel)
+            updateMemberViewUI()
         }
 
 
         var observedMemberFeedback = MemberFeedback(member.personNumber,0, mutableListOf())
-        memberViewModel.memberFeedback.observe(viewLifecycleOwner, Observer { observedMemberFeedback = it })
+        memberViewModel.memberFeedback.observe(viewLifecycleOwner,  { observedMemberFeedback = it })
 
-        binding.addComment.setOnClickListener(){
+        binding.addComment.setOnClickListener {
             memberViewModel.onCommentBtnClicked(observedMemberFeedback)
         }
 
-        memberViewModel.navigateToComment.observe(viewLifecycleOwner, Observer {
+        memberViewModel.navigateToComment.observe(viewLifecycleOwner,  {
             nextMember ->
             nextMember?.let{
                 this.findNavController().navigate(MemberFragmentDirections.actionMemberFragmentToCommentFragment(observedMemberFeedback))
@@ -79,8 +77,8 @@ class MemberFragment : Fragment() {
         return binding.root
     }
 
-    private fun updateMemberViewUI(viewModel: MemberViewModel){
-        memberViewModel.selectedMember.observe(viewLifecycleOwner, Observer { it ->
+    private fun updateMemberViewUI(){
+        memberViewModel.selectedMember.observe(viewLifecycleOwner,  {
             binding.apply {
                 name.text = memberViewModel?.updateNameText()
                 constituency.text = memberViewModel?.updateConstituencyText()
@@ -89,8 +87,8 @@ class MemberFragment : Fragment() {
                 ifMinister.text = memberViewModel?.updateMemberTitle()
             }
         })
-        memberViewModel.memberFeedback?.observe(viewLifecycleOwner, Observer {
-            binding.ratingScore.text = memberViewModel?.ratingScoreText()
+        memberViewModel.memberFeedback.observe(viewLifecycleOwner,  {
+            binding.ratingScore.text = memberViewModel.ratingScoreText()
         })
 
     }
