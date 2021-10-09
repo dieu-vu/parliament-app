@@ -48,14 +48,13 @@ class CommentFragment : Fragment() {
             binding.editComment.setText("")
 
         }
-
         return binding.root
     }
 
     private fun updateCommentListUI(adapter: CommentListAdapter){
         viewModel.memberFeedback.observe(viewLifecycleOwner, Observer {
             it?.let{
-                adapter.data = it?.comment.toList().reversed()
+                adapter.submitList(it.comment.toList().reversed())
             }
         })
     }

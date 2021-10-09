@@ -7,7 +7,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.parliamentmemberapp.data.MemberFeedback
 import com.example.parliamentmemberapp.data.MemberFeedbackDatabase
-import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.repository.MemberFeedbackRepository
 import kotlinx.coroutines.launch
 
@@ -29,11 +28,11 @@ class CommentViewModel (memberFeedback: MemberFeedback, application: Application
 
     fun updateFeedback(newComment: String){
         viewModelScope.launch {
-            val newMemberFeedback = _memberFeedback?.value?.let {
+            val newMemberFeedback = _memberFeedback.value?.let {
                 MemberFeedback(
-                    it?.personNumber ?:0,
-                    it?.rating ?:0,
-                    it?.comment.plus(newComment) as MutableList<String>
+                    it.personNumber,
+                    it.rating,
+                    it.comment.plus(newComment) as MutableList<String>
                 )
             }
             if (newMemberFeedback != null) {

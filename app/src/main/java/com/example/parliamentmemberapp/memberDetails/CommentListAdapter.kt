@@ -7,29 +7,50 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentmemberapp.R
+import com.example.parliamentmemberapp.databinding.TextItemViewBinding
 
-class CommentListAdapter: RecyclerView.Adapter<TextItemViewHolder>(){
-    var data = listOf<String>()
-        set(value){
-            field=value
-            notifyDataSetChanged()
-        }
+class CommentListAdapter: ListAdapter<String, CommentListAdapter.TextItemViewHolder>(CommentDiffCallback()){
 
-    override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
-        val item = data[position]
-        holder.textView.text = item
+        val item = getItem(position)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextItemViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.text_item_view, parent, false) as TextView
-        return TextItemViewHolder(view)
+        return TextItemViewHolder.from(parent)
+    }
+
+    class TextItemViewHolder private constructor(val binding: TextItemViewBinding): RecyclerView.ViewHolder(binding.root){
+
+        fun bind(item: String){
+            binding.singleComment.text = item
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): TextItemViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = TextItemViewBinding.inflate(layoutInflater, parent, false)
+                return TextItemViewHolder(binding)
+            }
+        }
+    }
+
+
+}
+
+class CommentDiffCallback: DiffUtil.ItemCallback<String>(){
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem === newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
     }
 
 }
 
-class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
