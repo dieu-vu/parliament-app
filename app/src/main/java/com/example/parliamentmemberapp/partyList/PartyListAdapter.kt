@@ -1,3 +1,7 @@
+//NAME: DIEU VU
+//DATE CREATED: 2-10-2021
+
+
 package com.example.parliamentmemberapp.partyList
 
 import android.view.LayoutInflater

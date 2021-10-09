@@ -1,13 +1,11 @@
+//NAME: DIEU VU
+//DATE CREATED: 2-10-2021
+
 package com.example.parliamentmemberapp.repository
 
-import android.app.Application
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.parliamentmemberapp.MyApp
-import com.example.parliamentmemberapp.data.*
 
+import androidx.lifecycle.LiveData
+import com.example.parliamentmemberapp.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -24,10 +22,6 @@ class MemberDataRepository (private val database: MemberDatabase) {
         }
     }
 
-    suspend fun insertEntry(member: MemberOfParliament){
-        dao.insert(member)
-        Log.i( "ZZZ","added an entry")
-    }
 
     fun getPartyMembers(partyName: String): LiveData<List<MemberOfParliament>> {
         return dao.getPartyMemberList(partyName)
@@ -38,6 +32,7 @@ class MemberDataRepository (private val database: MemberDatabase) {
 class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
     private val feedbackDao = feedbackDB.memberFeedbackDao
 
+    //Use only once to prepopulate the MemberFeedback data on first run
     suspend fun refreshFeedbackDatabase(){
         withContext(Dispatchers.IO){
             val memberList = ParliamentApi.retrofitService.getProperties().await()

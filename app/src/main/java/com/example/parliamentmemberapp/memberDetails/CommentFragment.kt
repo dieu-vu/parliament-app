@@ -2,7 +2,6 @@
 //DATE CREATED: 8-10-2021
 
 
-
 package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle

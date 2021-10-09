@@ -1,3 +1,6 @@
+//NAME: DIEU VU
+//DATE CREATED: 18-9-2021
+
 package com.example.parliamentmemberapp.data
 
 import android.os.Parcel

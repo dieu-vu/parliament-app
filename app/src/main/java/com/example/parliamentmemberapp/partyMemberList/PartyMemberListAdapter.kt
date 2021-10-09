@@ -1,3 +1,6 @@
+//NAME: DIEU VU
+//DATE CREATED: 4-10-2021
+
 package com.example.parliamentmemberapp.partyMemberList
 
 import android.graphics.Color

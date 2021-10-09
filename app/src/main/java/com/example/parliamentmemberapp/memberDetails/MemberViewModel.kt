@@ -1,3 +1,6 @@
+//NAME: DIEU VU
+//DATE CREATED: 18-9-2021
+
 package com.example.parliamentmemberapp.memberDetails
 
 import android.app.Application
@@ -17,11 +20,12 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
     private val feedbackDatabase = MemberFeedbackDatabase.getInstance(application)
     private val feedbackRepository = MemberFeedbackRepository(feedbackDatabase)
 
+    //LiveData object to observe and update Member Details
     private var _selectedMember = MutableLiveData<MemberOfParliament>()
     override val selectedMember: LiveData<MemberOfParliament>
         get() = _selectedMember
 
-
+    //LiveData object to observe and update Member feedback info
     private var _memberFeedback = MutableLiveData<MemberFeedback>()
     override val memberFeedback: LiveData<MemberFeedback>
         get() = _memberFeedback
@@ -36,10 +40,13 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
             }
     }
 
-    val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) { member -> "https://avoindata.eduskunta.fi/${member.picture}"}
+    //Transformation to get livedata of image url
+    val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) {
+            member -> "https://avoindata.eduskunta.fi/${member.picture}"}
 
 
     fun getNextMemberData(){
+        //Update Member Livedata with the next member in the party member list, sorted by Firstname
         viewModelScope.launch {
             val nextMember = database.memberDatabaseDao.getNextMember(
                 selectedMember.value?.party.toString(),
@@ -48,6 +55,7 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
             if (nextMember != null) {
                 _selectedMember.value = nextMember
 
+                //Rotate back to beginning of the list
             } else {
                 _selectedMember.value = database.memberDatabaseDao.getFirstMember(
                     selectedMember?.value?.party.toString())
@@ -74,7 +82,7 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
     }
 
 
-//Navigating to comment fragment, passing personNumber
+//Navigating to comment fragment, passing MemberFeedback object
     private val _navigateToComment = MutableLiveData<MemberFeedback>()
     val navigateToComment: LiveData<MemberFeedback>
         get() = _navigateToComment
