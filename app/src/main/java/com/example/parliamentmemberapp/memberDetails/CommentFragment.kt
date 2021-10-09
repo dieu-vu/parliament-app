@@ -1,16 +1,17 @@
+//NAME: DIEU VU
+//DATE CREATED: 8-10-2021
+
+
+
 package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.parliamentmemberapp.R
-import com.example.parliamentmemberapp.data.TypeConverter
 import com.example.parliamentmemberapp.databinding.FragmentCommentBinding
 
 
@@ -23,7 +24,7 @@ class CommentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(activity).application
         val memberFeedback = CommentFragmentArgs.fromBundle(this.requireArguments()).memberFeedback
 

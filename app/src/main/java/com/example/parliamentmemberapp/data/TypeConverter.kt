@@ -8,7 +8,7 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 
 //Room does not support the ability to store Lists directly, nor the ability to convert to/from Lists.
-//So we use this for multiple comments handling
+//So we use this Type converter for multiple comments handling
 
 class TypeConverter {
 

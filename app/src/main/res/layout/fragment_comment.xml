@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--NAME: DIEU VU-->
+<!--FILE CREATED DATE: 8-10-2021-->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -64,12 +67,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            //Takeaways: To be displayed as part of the screen, RecyclerView should be wrapped in a layout
+            //layout_width and height should be "match_parent", otherwise the adapter wont create the recycler view, it seems
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
