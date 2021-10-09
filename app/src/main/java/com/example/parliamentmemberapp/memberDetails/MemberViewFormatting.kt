@@ -51,7 +51,7 @@ interface MemberViewFormatting {
 
     //Display title if Minister or Member
     fun updateMemberTitle(): String{
-        return if(selectedMember?.value?.minister == true) "Minister" else "Member of Parliament"
+        return if(selectedMember.value?.minister == true) "Minister" else "Member of Parliament"
     }
 
     fun ratingScoreText(): String{

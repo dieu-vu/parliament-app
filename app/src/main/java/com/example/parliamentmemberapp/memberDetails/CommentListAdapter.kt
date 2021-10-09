@@ -3,14 +3,11 @@
 
 package com.example.parliamentmemberapp.memberDetails
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.databinding.TextItemViewBinding
 
 class CommentListAdapter: ListAdapter<String, CommentListAdapter.TextItemViewHolder>(CommentDiffCallback()){

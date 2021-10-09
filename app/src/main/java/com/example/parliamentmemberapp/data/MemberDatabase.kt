@@ -6,8 +6,6 @@ package com.example.parliamentmemberapp.data
 import android.content.Context
 import android.util.Log
 import androidx.room.*
-import androidx.room.TypeConverter
-import com.example.parliamentmemberapp.MyApp
 
 @Database(entities = [MemberOfParliament::class], version =1, exportSchema = false)
 @TypeConverters(com.example.parliamentmemberapp.data.TypeConverter::class)

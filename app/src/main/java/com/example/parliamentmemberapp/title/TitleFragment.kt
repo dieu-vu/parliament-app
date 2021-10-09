@@ -12,10 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.parliamentmemberapp.R
-import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
 import com.example.parliamentmemberapp.databinding.FragmentTitleBinding
-import com.example.parliamentmemberapp.memberDetails.MemberViewModel
-import com.example.parliamentmemberapp.partyList.PartyListViewModel
+
 
 
 class TitleFragment : Fragment() {

@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.reflect.jvm.internal.impl.util.MemberKindCheck
 
 class TitleViewModel(application: Application): AndroidViewModel(application) {
 

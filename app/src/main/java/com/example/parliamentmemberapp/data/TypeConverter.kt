@@ -13,7 +13,7 @@ import androidx.room.TypeConverter
 class TypeConverter {
 
     @TypeConverter
-    fun convertCommentsToString(commentList: MutableList<String>): String? {
+    fun convertCommentsToString(commentList: MutableList<String>): String {
         return commentListToStoredString(commentList)
     }
     @TypeConverter
@@ -24,7 +24,7 @@ class TypeConverter {
 
     companion object {
         @TypeConverter
-        fun commentListToStoredString(commentList: MutableList<String>): String? {
+        fun commentListToStoredString(commentList: MutableList<String>): String {
             var storedString = ""
             for (comment in commentList){
                 storedString += comment + ";"
