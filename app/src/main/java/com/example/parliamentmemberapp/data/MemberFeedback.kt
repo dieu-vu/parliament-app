@@ -15,5 +15,5 @@ data class MemberFeedback(
     @ColumnInfo (name = "rating")
     val rating: Int,
     @ColumnInfo (name = "comment")
-    val comment: String
+    val comment: MutableList<String>
 ): Parcelable

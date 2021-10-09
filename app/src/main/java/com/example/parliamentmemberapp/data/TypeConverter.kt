@@ -4,6 +4,7 @@
 
 package com.example.parliamentmemberapp.data
 
+import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 
 //Room does not support the ability to store Lists directly, nor the ability to convert to/from Lists.
@@ -12,18 +13,32 @@ import androidx.room.TypeConverter
 class TypeConverter {
 
     @TypeConverter
-    fun commentListToStoredString(commentList: MutableList<String>): String? {
-        var storedString = ""
-        for (comment in commentList){
-            storedString += comment + ";"
-        }
-        return storedString
+    fun convertCommentsToString(commentList: MutableList<String>): String? {
+        return commentListToStoredString(commentList)
+    }
+    @TypeConverter
+    fun convertStringToComments(storedString: String): List<String> {
+        return storedStringToCommentList(storedString)
     }
 
-    @TypeConverter
-    fun storedStringToCommentList(storedString: String): List<String> {
-        val commentList: List<String> = storedString.split(";").
-                filter { it.isNotEmpty() }.toList()
-        return commentList
+
+    companion object {
+        @TypeConverter
+        fun commentListToStoredString(commentList: MutableList<String>): String? {
+            var storedString = ""
+            for (comment in commentList){
+                storedString += comment + ";"
+            }
+            return storedString
+        }
+
+        @TypeConverter
+        fun storedStringToCommentList(storedString: String): List<String> {
+            val commentList: List<String> = storedString.split(";").
+                    filter { it.isNotEmpty() }.toList()
+            return commentList
+        }
     }
+
+
 }

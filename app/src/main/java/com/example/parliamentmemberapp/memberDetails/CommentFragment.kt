@@ -1,13 +1,16 @@
 package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.parliamentmemberapp.R
+import com.example.parliamentmemberapp.data.TypeConverter
 import com.example.parliamentmemberapp.databinding.FragmentCommentBinding
 
 
@@ -32,10 +35,32 @@ class CommentFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        val adapter = CommentListAdapter()
+        binding.commentList.adapter = adapter
+
+        viewModel.memberFeedback.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                adapter.data = it?.comment.toList()
+                Log.i("ZZZ","comment list: ${it?.comment.toList()} " )
+                Log.i("ZZZ","comment list: ${it?.comment.toList()[0]} ")
+                Log.i("ZZZ","adapter data: ${adapter.data} ")
+            }
+        })
+
         binding.submitCommentBtn.setOnClickListener() {
             val newComment = binding.editComment.text.toString()
             viewModel.updateFeedback(newComment)
+            viewModel.memberFeedback.observe(viewLifecycleOwner, Observer {
+                it?.let{
+                    adapter.data = it?.comment.toList()
+                    Log.i("ZZZ","comment list: ${it?.comment.toList()} " )
+                    Log.i("ZZZ","comment list: ${it?.comment.toList()[0]} ")
+                    Log.i("ZZZ","adapter data: ${adapter.data} ")
+                }
+            })
         }
+
+
 
         return binding.root
     }

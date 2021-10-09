@@ -2,13 +2,12 @@ package com.example.parliamentmemberapp.data
 
 import android.content.Context
 import android.util.Log
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.room.TypeConverter
 import com.example.parliamentmemberapp.MyApp
 
 @Database(entities = [MemberOfParliament::class], version =1, exportSchema = false)
+@TypeConverters(com.example.parliamentmemberapp.data.TypeConverter::class)
 abstract class MemberDatabase: RoomDatabase() {
 
     abstract val memberDatabaseDao: MemberDatabaseDao

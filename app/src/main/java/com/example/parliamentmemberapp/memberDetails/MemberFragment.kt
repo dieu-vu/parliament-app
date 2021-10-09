@@ -61,7 +61,7 @@ class MemberFragment : Fragment() {
         }
 
 
-        var observedMemberFeedback = MemberFeedback(member.personNumber,0,"")
+        var observedMemberFeedback = MemberFeedback(member.personNumber,0, mutableListOf())
         memberViewModel.memberFeedback.observe(viewLifecycleOwner, Observer { observedMemberFeedback = it })
 
         binding.addComment.setOnClickListener(){

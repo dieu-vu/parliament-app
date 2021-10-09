@@ -26,11 +26,13 @@ class CommentViewModel (memberFeedback: MemberFeedback, application: Application
 
     fun updateFeedback(newComment: String){
         viewModelScope.launch {
-            val newMemberFeedback = MemberFeedback(
-                _memberFeedback?.value?.personNumber ?:0,
-                _memberFeedback?.value?.rating ?:0,
-                "${_memberFeedback?.value?.comment}; ${newComment}"
-            )
+            val newMemberFeedback = _memberFeedback?.value?.let {
+                MemberFeedback(
+                    it?.personNumber ?:0,
+                    it?.rating ?:0,
+                    it?.comment.plus(newComment) as MutableList<String>
+                )
+            }
             if (newMemberFeedback != null) {
                 feedbackRepository.insertFeedback(newMemberFeedback)
                 _memberFeedback.value = newMemberFeedback

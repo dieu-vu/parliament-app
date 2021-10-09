@@ -41,7 +41,7 @@ class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
     suspend fun refreshFeedbackDatabase(){
         withContext(Dispatchers.IO){
             val memberList = ParliamentApi.retrofitService.getProperties().await()
-            memberList.forEach { feedbackDao.update(MemberFeedback(it.personNumber, 0,"")) }
+            memberList.forEach { feedbackDao.update(MemberFeedback(it.personNumber, 0, mutableListOf())) }
         }
     }
 

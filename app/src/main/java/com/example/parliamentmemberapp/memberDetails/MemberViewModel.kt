@@ -60,11 +60,12 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
 
     fun updateFeedback(ratingChange: Int){
         viewModelScope.launch {
-            val newMemberFeedback = MemberFeedback(
-                _memberFeedback?.value?.personNumber ?:0,
-                _memberFeedback?.value?.rating?.plus(ratingChange) ?:0,
-                "${_memberFeedback?.value?.comment}"
-                )
+            val newMemberFeedback = _memberFeedback.value?.let { it ->
+                MemberFeedback(
+                it?.personNumber ?: 0,
+                it?.rating.plus(ratingChange) ?: 0,
+                it?.comment.toMutableList())
+            }
             if (newMemberFeedback != null) {
                 feedbackRepository.insertFeedback(newMemberFeedback)
                 _memberFeedback.value = newMemberFeedback
