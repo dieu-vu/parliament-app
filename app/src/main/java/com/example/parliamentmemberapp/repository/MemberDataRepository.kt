@@ -32,7 +32,7 @@ class MemberDataRepository (private val database: MemberDatabase) {
 class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
     private val feedbackDao = feedbackDB.memberFeedbackDao
 
-    //Use only once to prepopulate the MemberFeedback data on first run
+    //Use only to prepopulate the MemberFeedback data on first run
     suspend fun refreshFeedbackDatabase(){
         withContext(Dispatchers.IO){
             val memberList = ParliamentApi.retrofitService.getProperties().await()

@@ -5,6 +5,7 @@ package com.example.parliamentmemberapp.title
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.example.parliamentmemberapp.MyApp
 import com.example.parliamentmemberapp.data.MemberDatabase
 import com.example.parliamentmemberapp.data.MemberFeedbackDatabase
 import com.example.parliamentmemberapp.repository.MemberDataRepository
@@ -28,9 +29,11 @@ class TitleViewModel(application: Application): AndroidViewModel(application) {
         coroutineScope.launch {
             memberRepository.refreshDatabase()
 
-//Run the following lines only once when generating Member feedback database for the first time
-//            memberFeedbackDatabase = MemberFeedbackDatabase.getInstance(application)
-//            MemberFeedbackRepository(memberFeedbackDatabase).refreshFeedbackDatabase()
+            //Check if memberFeedback database exist, if not prepopulate a new one
+            if (MyApp.appContext.getDatabasePath("member_feedback_db").exists() == false) {
+                memberFeedbackDatabase = MemberFeedbackDatabase.getInstance(application)
+                MemberFeedbackRepository(memberFeedbackDatabase).refreshFeedbackDatabase()
+            }
 
         }
     }
