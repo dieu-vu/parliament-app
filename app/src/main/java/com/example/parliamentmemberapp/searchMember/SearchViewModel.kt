@@ -1,12 +1,13 @@
+//NAME: DIEU VU
+//DATE CREATED: 9-10-2021
+
 package com.example.parliamentmemberapp.searchMember
 
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.parliamentmemberapp.data.MemberDatabase
 import com.example.parliamentmemberapp.data.MemberOfParliament
-import com.example.parliamentmemberapp.partyMemberList.PartyMemberViewModel
 import com.example.parliamentmemberapp.repository.MemberDataRepository
-import kotlinx.coroutines.launch
 
 
 class SearchViewModel(searchString: String, application: Application): AndroidViewModel(application) {
@@ -19,7 +20,6 @@ class SearchViewModel(searchString: String, application: Application): AndroidVi
     private val _navigateToMemberDetails = MutableLiveData<MemberOfParliament>()
     val navigateToMemberDetails
         get() = _navigateToMemberDetails
-
 
     fun refreshSearchResult(searchString: String){
         searchResultList = memberRepository.searchMembers(searchString)

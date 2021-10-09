@@ -1,3 +1,6 @@
+//NAME: DIEU VU
+//DATE CREATED: 9-10-2021
+
 package com.example.parliamentmemberapp.searchMember
 
 import android.view.LayoutInflater
@@ -27,6 +30,7 @@ class SearchResultAdapter (val clickListener: SearchResultListener): ListAdapter
             item: MemberOfParliament,
             clickListener: SearchResultListener
         ) {
+            binding.member = item
             binding.itemContent.text = formatResultText(item)
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -52,7 +56,6 @@ class SearchResultAdapter (val clickListener: SearchResultListener): ListAdapter
         }
     }
 }
-
 
 
 class SearchResultListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){

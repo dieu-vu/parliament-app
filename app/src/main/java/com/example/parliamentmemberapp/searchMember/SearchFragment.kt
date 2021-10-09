@@ -1,3 +1,6 @@
+//NAME: DIEU VU
+//DATE CREATED: 9-10-2021
+
 package com.example.parliamentmemberapp.searchMember
 
 import android.os.Bundle
@@ -9,10 +12,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.parliamentmemberapp.R
-import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
 import com.example.parliamentmemberapp.databinding.FragmentSearchBinding
-import com.example.parliamentmemberapp.partyMemberList.*
 
 class SearchFragment : Fragment() {
 
@@ -34,7 +34,8 @@ class SearchFragment : Fragment() {
         searchString = "init not found"
         val viewModelFactory = SearchViewModelFactory(searchString, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
-        var adapter = SearchResultAdapter(SearchResultListener {
+
+        val adapter = SearchResultAdapter(SearchResultListener {
                 member -> viewModel.onMemberNameClicked(member)
         })
 
@@ -45,6 +46,8 @@ class SearchFragment : Fragment() {
         binding.searchBtn.setOnClickListener {
             searchString = binding.searchText.text.toString()
             viewModel.refreshSearchResult(searchString)
+            binding.searchText.setText("")
+
             viewModel.searchResultList.observe(viewLifecycleOwner, Observer {
                 adapter.submitList(it)
                 Log.i("ZZZ", "number of item in adapter: ${adapter.itemCount}")
@@ -53,7 +56,7 @@ class SearchFragment : Fragment() {
         }
 
         viewModel.navigateToMemberDetails.observe(viewLifecycleOwner, Observer{ member ->
-            member.let{
+            member?.let{
                 this.findNavController().navigate(
                     SearchFragmentDirections.actionSearchFragmentToMemberFragment(member))
                 viewModel.onMemberDetailsNavigationCompleted()
