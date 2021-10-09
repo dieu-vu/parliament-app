@@ -34,8 +34,8 @@ class SearchResultAdapter (val clickListener: SearchResultListener): ListAdapter
             binding.itemContent.text = formatResultText(item)
             binding.clickListener = clickListener
             binding.executePendingBindings()
-
         }
+
         fun formatResultText(item: MemberOfParliament): String {
             val builder = StringBuilder()
             builder
