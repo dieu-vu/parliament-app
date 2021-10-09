@@ -38,31 +38,24 @@ class CommentFragment : Fragment() {
         val adapter = CommentListAdapter()
         binding.commentList.adapter = adapter
 
-        viewModel.memberFeedback.observe(viewLifecycleOwner, Observer {
-            it?.let{
-                adapter.data = it?.comment.toList()
-                Log.i("ZZZ","comment list: ${it?.comment.toList()} " )
-                Log.i("ZZZ","comment list: ${it?.comment.toList()[0]} ")
-                Log.i("ZZZ","adapter data: ${adapter.data} ")
-            }
-        })
+        updateCommentListUI(adapter)
 
         binding.submitCommentBtn.setOnClickListener() {
             val newComment = binding.editComment.text.toString()
             viewModel.updateFeedback(newComment)
-            viewModel.memberFeedback.observe(viewLifecycleOwner, Observer {
-                it?.let{
-                    adapter.data = it?.comment.toList()
-                    Log.i("ZZZ","comment list: ${it?.comment.toList()} " )
-                    Log.i("ZZZ","comment list: ${it?.comment.toList()[0]} ")
-                    Log.i("ZZZ","adapter data: ${adapter.data} ")
-                }
-            })
+            updateCommentListUI(adapter)
+
         }
 
-
-
         return binding.root
+    }
+
+    private fun updateCommentListUI(adapter: CommentListAdapter){
+        viewModel.memberFeedback.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                adapter.data = it?.comment.toList().reversed()
+            }
+        })
     }
 
 
