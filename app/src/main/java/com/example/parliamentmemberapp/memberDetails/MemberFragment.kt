@@ -27,18 +27,15 @@ class MemberFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         val application = requireNotNull(activity).application
 
         binding = FragmentMemberBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-
         val member = MemberFragmentArgs.fromBundle(requireArguments()).selectedMember
         val viewModelFactory = MemberViewModelFactory(member, application)
         memberViewModel = ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
         binding.memberViewModel = memberViewModel
-
 
         updateMemberViewUI()
 

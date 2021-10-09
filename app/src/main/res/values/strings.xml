@@ -18,4 +18,5 @@
     <string name="add_comment_btn">Add or View comment</string>
     <string name="submit_comment_btn">Save Comment</string>
     <string name="comment_content">Edit comment</string>
+    <string name="search_hint">Type something to search</string>
 </resources>

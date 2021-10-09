@@ -25,7 +25,7 @@ class CommentListAdapter: ListAdapter<String, CommentListAdapter.TextItemViewHol
     class TextItemViewHolder private constructor(val binding: TextItemViewBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: String){
-            binding.singleComment.text = item
+            binding.itemContent.text = item
         }
 
         companion object {

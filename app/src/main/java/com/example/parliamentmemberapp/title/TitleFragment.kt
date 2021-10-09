@@ -32,9 +32,10 @@ class TitleFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_title, container, false)
 
-//        binding.viewInfoButton.setOnClickListener(
-//            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_memberFragment)
-//        )
+        binding.searchBtn.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_searchFragment)
+        )
+
         binding.viewPartyList.setOnClickListener (
             Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_partyListFragment)
         )

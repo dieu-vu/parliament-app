@@ -4,6 +4,7 @@
 package com.example.parliamentmemberapp.repository
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.parliamentmemberapp.data.*
 import kotlinx.coroutines.Dispatchers
@@ -22,11 +23,14 @@ class MemberDataRepository (private val database: MemberDatabase) {
         }
     }
 
-
     fun getPartyMembers(partyName: String): LiveData<List<MemberOfParliament>> {
         return dao.getPartyMemberList(partyName)
     }
 
+    fun searchMembers(searchString: String): LiveData<List<MemberOfParliament>> {
+        Log.i("ZZZ", "founded: ${dao.searchMember(searchString).value?.size}")
+        return dao.searchMember(searchString)
+    }
 }
 
 class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
