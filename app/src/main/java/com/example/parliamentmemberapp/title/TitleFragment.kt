@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.databinding.FragmentTitleBinding
 
@@ -32,13 +33,13 @@ class TitleFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_title, container, false)
 
-        binding.searchBtn.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_searchFragment)
-        )
+        binding.searchBtn.setOnClickListener {
+            this.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToSearchFragment())
+        }
 
-        binding.viewPartyList.setOnClickListener (
-            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_partyListFragment)
-        )
+        binding.viewPartyList.setOnClickListener {
+            this.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToPartyListFragment())
+        }
         return binding.root
     }
 

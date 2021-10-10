@@ -19,4 +19,8 @@
     <string name="submit_comment_btn">Save Comment</string>
     <string name="comment_content">Edit comment</string>
     <string name="search_hint">Type something to search</string>
+    <string name="party_list">Party List</string>
+    <string name="party_member_list">Party Member List</string>
+    <string name="member_details">Member\'s Information </string>
+    <string name="comment_fragment">Comments</string>
 </resources>

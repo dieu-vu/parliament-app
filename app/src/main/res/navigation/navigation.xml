@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.example.parliamentmemberapp.title.TitleFragment"
-        android:label="fragment_title"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_title" >
         <action
             android:id="@+id/action_titleFragment_to_partyListFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/memberFragment"
         android:name="com.example.parliamentmemberapp.memberDetails.MemberFragment"
-        android:label="MemberFragment"
+        android:label="@string/member_details"
         >
         <argument
             android:name="selectedMember"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/partyListFragment"
         android:name="com.example.parliamentmemberapp.partyList.PartyListFragment"
-        android:label="fragment_party_list"
+        android:label="@string/party_list"
         tools:layout="@layout/fragment_party_list" >
         <action
             android:id="@+id/action_partyListFragment_to_partyMemberFragment"
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/partyMemberFragment"
         android:name="com.example.parliamentmemberapp.partyMemberList.PartyMemberFragment"
-        android:label="fragment_party_member"
+        android:label="@string/party_member_list"
         tools:layout="@layout/fragment_party_member" >
         <argument
             android:name="party"
@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/commentFragment"
         android:name="com.example.parliamentmemberapp.memberDetails.CommentFragment"
-        android:label="fragment_comment"
+        android:label="@string/comment_fragment"
         tools:layout="@layout/fragment_comment" >
         <action
             android:id="@+id/action_commentFragment_to_memberFragment"
@@ -65,7 +65,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.parliamentmemberapp.searchMember.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="@string/search_btn">
         <action
             android:id="@+id/action_searchFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
