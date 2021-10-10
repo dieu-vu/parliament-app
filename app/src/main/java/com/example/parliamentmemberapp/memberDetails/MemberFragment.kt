@@ -6,12 +6,13 @@ package com.example.parliamentmemberapp.memberDetails
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.example.parliamentmemberapp.R
 import com.example.parliamentmemberapp.data.MemberFeedback
 import com.example.parliamentmemberapp.databinding.FragmentMemberBinding
 
@@ -70,7 +71,8 @@ class MemberFragment : Fragment() {
                 memberViewModel.navigateToCommentCompleted()
             }
         })
-
+        
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -88,5 +90,15 @@ class MemberFragment : Fragment() {
             binding.ratingScore.text = memberViewModel.ratingScoreText()
         })
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) ||
+                super.onOptionsItemSelected(item)
     }
 }

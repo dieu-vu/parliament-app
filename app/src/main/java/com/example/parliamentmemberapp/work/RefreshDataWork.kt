@@ -1,7 +1,9 @@
+//NAME: DIEU VU
+//DATE CREATED: 10-10-2021
+
 package com.example.parliamentmemberapp.work
 
 import android.content.Context
-import android.service.voice.AlwaysOnHotwordDetector
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.parliamentmemberapp.data.MemberDatabase
