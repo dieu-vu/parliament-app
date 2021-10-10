@@ -57,12 +57,26 @@
 
            <ImageView
                android:id="@+id/member_image"
-               android:layout_width="match_parent"
+               android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:contentDescription="@string/member_image"
                android:paddingTop="16dp"
                android:src="@drawable/ic_launcher_foreground"
                app:imageUrl="@{memberViewModel.imageSrcUrl}"
+               />
+
+           <ImageView
+               android:contentDescription="@string/twitter_link"
+               android:id="@+id/twitter_link"
+               android:layout_marginTop="8dp"
+               android:layout_width="40sp"
+               android:layout_height="40sp"
+               android:scaleType="centerCrop"
+               android:src="@drawable/twitter_icon"
+               android:clickable="true"
+               android:autoLink="web"
+               android:visibility="visible"
+               android:tag="@{memberViewModel.twitterUrl}"
                />
 
            <LinearLayout

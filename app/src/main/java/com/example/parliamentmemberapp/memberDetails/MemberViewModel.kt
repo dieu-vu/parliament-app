@@ -43,6 +43,9 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
     //Transformation to get livedata of image url
     val imageSrcUrl: LiveData<String> = Transformations.map(selectedMember) {
             member -> "https://avoindata.eduskunta.fi/${member.picture}"}
+    val twitterUrl: LiveData<String> = Transformations.map(selectedMember) {
+            member -> member.twitter
+    }
 
 
     fun getNextMemberData(){

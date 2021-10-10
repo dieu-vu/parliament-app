@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.parliamentmemberapp.R
 
+
 @BindingAdapter("partyNameFormatted")
 fun TextView.setPartyName(item: String){
     item.let{

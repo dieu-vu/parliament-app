@@ -8,7 +8,6 @@
     <string name="age">Age</string>
     <string name="party">Party</string>
     <string name="view_next_member">View next member</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="upVote_bth">Upvote</string>
     <string name="downVote_btn">Downvote</string>
     <string name="view_party_list">View Party List</string>
@@ -23,4 +22,5 @@
     <string name="party_member_list">Party Member List</string>
     <string name="member_details">Member\'s Information </string>
     <string name="comment_fragment">Comments</string>
+    <string name="twitter_link">Twitter</string>
 </resources>

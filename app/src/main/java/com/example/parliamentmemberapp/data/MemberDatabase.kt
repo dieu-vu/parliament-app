@@ -19,7 +19,6 @@ abstract class MemberDatabase: RoomDatabase() {
 
         fun getInstance(context: Context): MemberDatabase{
             synchronized(this){
-                Log.i("ZZZ", "DB onCreate")
                 var instance = INSTANCE
                 if (instance==null){
                     instance = Room.databaseBuilder(
