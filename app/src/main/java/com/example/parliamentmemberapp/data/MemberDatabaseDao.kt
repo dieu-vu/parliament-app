@@ -34,10 +34,10 @@ interface MemberDatabaseDao {
     suspend fun clearData()
 
     @Query("""SELECT * FROM MemberOfParliament
-            WHERE first LIKE ('%' || :searchString || '%')
-            OR last LIKE ('%' || :searchString || '%')
-            OR constituency LIKE ('%' || :searchString || '%')
-            OR party LIKE ('%' || :searchString || '%')
+            WHERE LOWER(first) LIKE LOWER('%' || :searchString || '%')
+            OR LOWER(last) LIKE LOWER('%' || :searchString || '%')
+            OR LOWER(constituency) LIKE LOWER('%' || :searchString || '%')
+            OR LOWER(party) LIKE LOWER('%' || :searchString || '%')
             ORDER BY first"""
     )
     fun searchMember(searchString: String): LiveData<List<MemberOfParliament>>
