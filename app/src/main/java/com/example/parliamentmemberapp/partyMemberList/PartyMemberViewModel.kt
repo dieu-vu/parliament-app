@@ -9,7 +9,7 @@ import com.example.parliamentmemberapp.data.MemberDatabase
 import com.example.parliamentmemberapp.data.MemberOfParliament
 import com.example.parliamentmemberapp.repository.MemberDataRepository
 
-class PartyMemberViewModel(val partyName: String, application: Application): AndroidViewModel(application) {
+class PartyMemberViewModel(partyName: String, application: Application): AndroidViewModel(application) {
 
 
     private val database = MemberDatabase.getInstance(application)

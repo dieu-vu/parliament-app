@@ -61,6 +61,8 @@ class PartyMemberFragment : Fragment() {
         return binding.root
     }
 
+
+    //Create option menu to navigate to search fragment from this fragment
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.overflow_menu, menu)

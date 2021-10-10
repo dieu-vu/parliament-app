@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.room.*
 
 @Database(entities = [MemberOfParliament::class], version =1, exportSchema = false)
-@TypeConverters(com.example.parliamentmemberapp.data.TypeConverter::class)
+@TypeConverters(TypeConverter::class)
 abstract class MemberDatabase: RoomDatabase() {
 
     abstract val memberDatabaseDao: MemberDatabaseDao

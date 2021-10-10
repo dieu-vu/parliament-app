@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Entity (tableName = "member_feedback_db")
-@Parcelize
+@Parcelize //Parcelize this data object to pass as arguments between fragments
 data class MemberFeedback(
     @PrimaryKey
     val personNumber: Int,

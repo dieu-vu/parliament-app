@@ -15,8 +15,10 @@ class PartyListViewModel(application: Application): AndroidViewModel(application
     private val database = getInstance(application)
     private val memberRepository = MemberDataRepository(database)
 
+    //Party list from memberDatabaseDao method
     val partyList: LiveData<List<String>> = memberRepository.partyList
 
+    //Navigation to PartyMemberList Fragment
     private val _navigateToPartyMemberList = MutableLiveData<String>()
     val navigateToPartyMemberList
         get() = _navigateToPartyMemberList

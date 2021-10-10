@@ -4,16 +4,10 @@
 package com.example.parliamentmemberapp.data
 
 import android.content.Context
-import android.util.Log
 import androidx.room.*
-import androidx.room.TypeConverter
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.parliamentmemberapp.repository.MemberFeedbackRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @Database(entities = [MemberFeedback::class], version =1, exportSchema = false)
-@TypeConverters(com.example.parliamentmemberapp.data.TypeConverter::class)
+@TypeConverters(TypeConverter::class)
 abstract class MemberFeedbackDatabase: RoomDatabase() {
 
     abstract val memberFeedbackDao: MemberFeedbackDao
@@ -24,7 +18,6 @@ abstract class MemberFeedbackDatabase: RoomDatabase() {
 
         fun getInstance(context: Context): MemberFeedbackDatabase{
             synchronized(this){
-                Log.i("ZZZ", "DB onCreate")
                 var instance = INSTANCE
                 if (instance==null){
                     instance = Room.databaseBuilder(

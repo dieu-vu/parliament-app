@@ -33,6 +33,7 @@ class MemberDataRepository (private val database: MemberDatabase) {
     }
 }
 
+
 class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
     private val feedbackDao = feedbackDB.memberFeedbackDao
 
@@ -43,7 +44,6 @@ class MemberFeedbackRepository (private val feedbackDB: MemberFeedbackDatabase){
             memberList.forEach { feedbackDao.update(MemberFeedback(it.personNumber, 0, mutableListOf())) }
         }
     }
-
 
     suspend fun insertFeedback(member: MemberFeedback){
         feedbackDao.insert(member)

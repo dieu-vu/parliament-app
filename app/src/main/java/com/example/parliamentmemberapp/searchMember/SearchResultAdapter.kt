@@ -57,7 +57,7 @@ class SearchResultAdapter (val clickListener: SearchResultListener): ListAdapter
     }
 }
 
-
+//Update data changes
 class SearchResultListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){
     override fun areItemsTheSame(
         oldItem: MemberOfParliament,
@@ -74,6 +74,8 @@ class SearchResultListDiffCallBack: DiffUtil.ItemCallback<MemberOfParliament>(){
     }
 }
 
+
+//Passing MemberOfParliament object when user click on RecyclerView list item
 class SearchResultListener(val clickListener: (member: MemberOfParliament) -> Unit){
     fun onClick(member: MemberOfParliament) = clickListener(member)
 }
