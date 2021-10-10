@@ -4,11 +4,13 @@
 
 package com.example.parliamentmemberapp.memberDetails
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.parliamentmemberapp.databinding.FragmentCommentBinding
@@ -41,10 +43,12 @@ class CommentFragment : Fragment() {
         updateCommentListUI(adapter)
 
         binding.submitCommentBtn.setOnClickListener() {
+            requireView().hideKeyboard()
             val newComment = binding.editComment.text.toString()
             viewModel.updateFeedback(newComment)
             updateCommentListUI(adapter)
             binding.editComment.setText("")
+
 
         }
         return binding.root
@@ -57,6 +61,12 @@ class CommentFragment : Fragment() {
             }
         })
     }
+
+    fun View.hideKeyboard() {
+        val inputMethodManager = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+
 
 
 }

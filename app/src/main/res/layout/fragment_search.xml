@@ -14,7 +14,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         tools:context=".searchMember.SearchFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
 
         <EditText
             android:id="@+id/search_text"
