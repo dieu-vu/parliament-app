@@ -71,7 +71,7 @@ class MemberFragment : Fragment() {
                 memberViewModel.navigateToCommentCompleted()
             }
         })
-        
+
         setHasOptionsMenu(true)
         return binding.root
     }
