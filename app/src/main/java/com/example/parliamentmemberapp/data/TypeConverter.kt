@@ -4,7 +4,6 @@
 
 package com.example.parliamentmemberapp.data
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 
 //Room does not support the ability to store Lists directly, nor the ability to convert to/from Lists.

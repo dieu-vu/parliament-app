@@ -55,7 +55,7 @@ class MemberViewModel (member: MemberOfParliament, application: Application):
             if (nextMember != null) {
                 _selectedMember.value = nextMember
 
-                //Rotate back to beginning of the list
+                //Rotate back to beginning of the list if reaching end of list
             } else {
                 _selectedMember.value = database.memberDatabaseDao.getFirstMember(
                     selectedMember?.value?.party.toString())

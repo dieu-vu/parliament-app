@@ -65,7 +65,6 @@ class SearchFragment : Fragment() {
                 viewModel.onMemberDetailsNavigationCompleted()
             }
         })
-
         return binding.root
     }
 
