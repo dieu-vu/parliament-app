@@ -1,7 +1,8 @@
 # Parliament App
-This project is done as part of the course  Object-Oriented Programming and Datacommunication at Metropolia UAS.
-Using Kotlin in Android Studio.
-Short description: A simple android app to search and view Parliament member information. User can add reactions and comments which are stored in device memory.
+This project is done as part of the course  Object-Oriented Programming and Datacommunication at Metropolia UAS.<br>
+Using Kotlin in Android Studio. <br>
+### Short description: 
+A simple android app to search and view Parliament member information. User can add reactions and comments which are stored in device memory. <br>
 Data source provided by Peter Hjort in [link](https://users.metropolia.fi/~peterh/mps.json)
 
 ## Implementations:
