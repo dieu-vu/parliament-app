@@ -29,3 +29,5 @@ Data source provided by Peter Hjort in [link](https://users.metropolia.fi/~peter
 - Teaching materials by course teachers: Peter Hjort and Petri Vesikivi
 - Materials in the course [Developing Android Apps with Kotlin](https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012)
 - StackOverflow, Medium posts
+
+## [Screenshots](https://github.com/dieu-vu/parliament-app/issues/1#issue-1022641767)
