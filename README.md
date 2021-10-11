@@ -7,7 +7,7 @@ Data source provided by Peter Hjort in [link](https://users.metropolia.fi/~peter
 
 ## Implementations:
   - Use retrofit and moshi libraries for reading the data from a public url. Store the data in a Room database in the Android device.<br>
-  -  Use WorkManager to regularily update the data every 6 hours in the background, with constraint of battery level, current usage and network meter.
+  -  Use WorkManager to regularly update the data every 6 hours in the background, with constraint of battery level, current usage and network meter.
   - Define class(es) to store reaction grades and comments and create Room database tables from them.
   - Implement a caching mechanism to avoid repeadtedly accessing network for the same data using Glide.
   - Implement repository class(es) for database / image store access. 
